@@ -1,9 +1,10 @@
 {
-  "name": "lastfm-client",
+  "name": "lastfm",
   "version": "1.0.0",
   "description": "Fully typed client for interacting with the last.fm API.",
   "main": "dist/index.js",
   "scripts": {
+    "start": "node dist",
     "test": "jest",
     "eslint": "eslint ./src/**/*.ts",
     "clean": "rm -rf dist",
@@ -12,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:sindrekjr/lastfm-client.git"
+    "url": "git+ssh://git@github.com:sindrekjr/lastfm.git"
   },
   "keywords": [
     "lastfm",
@@ -22,14 +23,15 @@
   "author": "sindrekjr",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/sindrekjr/lastfm-client/issues"
+    "url": "https://github.com/sindrekjr/lastfm/issues"
   },
-  "homepage": "https://github.com/sindrekjr/lastfm-client#readme",
+  "homepage": "https://github.com/sindrekjr/lastfm#readme",
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/node": "^16.6.2",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
+    "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-jest": "^24.4.0",
     "jest": "^27.0.6",
