@@ -1,22 +1,28 @@
-export interface Params extends Record<string, string> {
+import fetch, { HeadersInit, Response } from 'node-fetch';
+
+export interface Params extends Record<string, string | undefined> {
   api_key: string;
-  format: string;
 }
 
-export abstract class ApiProxy {
-  protected baseUrl: string = 'http://ws.audioscrobbler.com/2.0/';
-  protected headers: HeadersInit = {
-    'Content-Type': 'application/json',
-    'User-Agent': 'git@github.com:sindrekjr/lastfm',
-  };
+const getQueryParams = (method: string, params: Params, format: string = 'json'): URLSearchParams => (
+  new URLSearchParams({
+    method,
+    format,
+    ...params,
+  })
+);
 
-  protected sendRequest = async (params: Params): Promise<Response> => {
-    const paramsString = new URLSearchParams(params).toString();
-    return await fetch(`${this.baseUrl}?${paramsString}`, {
-      headers: {
-        ...this.headers,
-        'Content-Length': Buffer.byteLength(paramsString).toString(),
-      },
-    });
-  }
+const getHeaders = (): HeadersInit => ({
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'User-Agent': 'git@github.com:sindrekjr/lastfm',
+});
+
+export abstract class ApiProxy {
+  private static baseUrl: string = 'https://ws.audioscrobbler.com/2.0/';
+
+  static sendRequest = async (method: string, params: Params): Promise<Response> => (
+    await fetch(`${ApiProxy.baseUrl}?${getQueryParams(method, params).toString()}`, {
+      headers: getHeaders(),
+    })
+  );
 }

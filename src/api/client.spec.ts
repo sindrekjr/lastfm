@@ -11,5 +11,5 @@ describe('ApiClient', () => {
   it('should store given shared secret', () => {
     const client = new ApiClient('', 'testSharedSecret');
     expect(Object.values(client)).toContain('testSharedSecret');
-  })
+  });
 });
