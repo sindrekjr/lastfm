@@ -1,5 +1,3 @@
-import fetch, { HeadersInit, Response } from 'node-fetch';
-
 export interface Params extends Record<string, string | undefined> {
   api_key: string;
 }
