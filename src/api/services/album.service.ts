@@ -1,4 +1,4 @@
-import { ApiProxy, Params } from './proxy.class';
+import { ApiProxy, Params } from '../proxy';
 
 type AlbumParams = Params & ({
   artist: string;

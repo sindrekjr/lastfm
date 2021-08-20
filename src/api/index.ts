@@ -1,1 +1,1 @@
-export * from './client.class';
+export * from './client';
