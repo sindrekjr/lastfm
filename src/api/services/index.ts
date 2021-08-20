@@ -1,1 +1,1 @@
-export * as album from './album.service';
+export * from './album.service';

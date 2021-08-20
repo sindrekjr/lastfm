@@ -1,4 +1,4 @@
-export interface Params extends Record<string, string | undefined> {
+export interface Params extends Record<string, number | string | undefined> {
   api_key: string;
 }
 
