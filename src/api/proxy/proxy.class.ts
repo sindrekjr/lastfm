@@ -1,26 +1,54 @@
 export interface Params extends Record<string, number | string | undefined> {
-  api_key: string;
+  api_key?: string;
 }
 
-const getQueryParams = (method: string, params: Params, format: string = 'json'): URLSearchParams => (
-  new URLSearchParams({
-    method,
-    format,
-    ...params,
-  })
-);
+export interface ApiProxyOptions {
+  apiKey: string;
+  format?: string;
+  sessionKey?: string;
+  sharedSecret?: string;
+  userAgent?: string;
+}
 
-const getHeaders = (): HeadersInit => ({
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'User-Agent': 'git@github.com:sindrekjr/lastfm',
-});
+export class ApiProxy {
+  private baseUrl: string = 'https://ws.audioscrobbler.com/2.0/';
+  private apiKey: string;
+  private format: string;
+  private userAgent: string;
+  private sessionKey?: string;
+  private sharedSecret?: string;
 
-export abstract class ApiProxy {
-  private static baseUrl: string = 'https://ws.audioscrobbler.com/2.0/';
+  constructor({
+    apiKey,
+    format = 'json',
+    sessionKey,
+    sharedSecret,
+    userAgent = 'git@github.com:sindrekjr/lastfm',
+  }: ApiProxyOptions) {
+    this.apiKey = apiKey;
+    this.format = format;
+    this.sessionKey = sessionKey;
+    this.sharedSecret = sharedSecret;
+    this.userAgent = userAgent;
+  }
 
-  static sendRequest = async (method: string, params: Params): Promise<Response> => (
-    await fetch(`${ApiProxy.baseUrl}?${getQueryParams(method, params).toString()}`, {
-      headers: getHeaders(),
+  public sendRequest = async (method: string, params: Params): Promise<Response> => (
+    await fetch(`${this.baseUrl}?${this.getQueryParams(method, params).toString()}`, {
+      headers: this.getHeaders(),
+    })
+  );
+
+  private getHeaders = (): HeadersInit => ({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'User-Agent': this.userAgent,
+  });
+
+  private getQueryParams = (method: string, params: Params): URLSearchParams => (
+    new URLSearchParams({
+      api_key: this.apiKey,
+      format: this.format,
+      method,
+      ...params,
     })
   );
 }

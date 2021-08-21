@@ -32,11 +32,8 @@ export interface AlbumInfoResponse {
   };
 }
 
-export const getInfo = async (api_key: string, params: AlbumInfoParams): Promise<AlbumInfoResponse> => {
-  const response = await ApiProxy.sendRequest('album.getInfo', {
-    api_key,
-    ...params,
-  });
+export const getInfo = async (proxy: ApiProxy, params: AlbumInfoParams): Promise<AlbumInfoResponse> => {
+  const response = await proxy.sendRequest('album.getInfo', params);
   const { album } = await response.json();
   return album;
 };

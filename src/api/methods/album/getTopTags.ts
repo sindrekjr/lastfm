@@ -6,11 +6,8 @@ export type AlbumTopTagsParams = AlbumParams & {
   autocorrect?: string;
 };
 
-export const getTopTags = async (api_key: string, params: AlbumTopTagsParams): Promise<Tag[]> => {
-  const response = await ApiProxy.sendRequest('album.getTopTags', {
-    api_key,
-    ...params,
-  });
+export const getTopTags = async (proxy: ApiProxy, params: AlbumTopTagsParams): Promise<Tag[]> => {
+  const response = await proxy.sendRequest('album.getTopTags', params);
   const { topTags } = await response.json();
   return topTags;
 };

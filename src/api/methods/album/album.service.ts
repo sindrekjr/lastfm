@@ -1,33 +1,35 @@
-import { ApiClient } from '../../client';
+import { ApiProxy, Params } from '../../proxy';
 import { Tag } from '../common';
 
 import { AlbumInfoParams, AlbumInfoResponse, getInfo } from './getInfo';
 import { AlbumTagsParams, getTags } from './getTags';
 import { AlbumTopTagsParams, getTopTags } from './getTopTags';
 
-export type AlbumParams = ({
-  artist: string;
-  album: string;
-} | {
-  mbid: string;
-});
+export type AlbumParams = Params & (
+  {
+    artist: string;
+    album: string;
+  } | {
+    mbid: string;
+  }
+);
 
 export class AlbumService {
-  private client: ApiClient;
+  private proxy: ApiProxy;
 
-  constructor(client: ApiClient) {
-    this.client = client;
+  constructor(proxy: ApiProxy) {
+    this.proxy = proxy;
   }
 
   public getInfo = async (params: AlbumInfoParams): Promise<AlbumInfoResponse> => (
-    getInfo(this.client.key, params)
+    getInfo(this.proxy, params)
   );
 
   public getTags = async (params: AlbumTagsParams): Promise<Tag[]> => (
-    getTags(this.client.key, params)
+    getTags(this.proxy, params)
   );
 
   public getTopTags = async (params: AlbumTopTagsParams): Promise<Tag[]> => (
-    getTopTags(this.client.key, params)
+    getTopTags(this.proxy, params)
   );
 }

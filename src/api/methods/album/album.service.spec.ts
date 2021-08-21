@@ -1,11 +1,11 @@
-import { ApiClient } from '../../client';
 import { ApiProxy } from '../../proxy';
 import { AlbumService } from './album.service';
 
 describe('AlbumService', () => {
-  const api_key = 'testApiKey';
-  const album = new AlbumService(new ApiClient(api_key));
-  const proxy = jest.spyOn(ApiProxy, 'sendRequest');
+  const apiKey = 'testApiKey';
+  const proxy = new ApiProxy({ apiKey });
+  const album = new AlbumService(proxy);
+  const sendRequest = jest.spyOn(proxy, 'sendRequest');
 
   beforeAll(() => {
     global.fetch = jest.fn(() => Promise.resolve({
@@ -30,8 +30,8 @@ describe('AlbumService', () => {
 
     it('should call proxy with expected params', () => {
       album.getInfo(getInfoParams);
-      expect(proxy).toHaveBeenCalledWith('album.getInfo', { api_key, ...getInfoParams });
-      expect(proxy).toHaveBeenCalledTimes(1);
+      expect(sendRequest).toHaveBeenCalledWith('album.getInfo', getInfoParams);
+      expect(sendRequest).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -51,8 +51,8 @@ describe('AlbumService', () => {
 
     it('should call proxy with expected params', () => {
       album.getTags(getTagsParams);
-      expect(proxy).toHaveBeenCalledWith('album.getTags', { api_key, ...getTagsParams });
-      expect(proxy).toHaveBeenCalledTimes(1);
+      expect(sendRequest).toHaveBeenCalledWith('album.getTags', getTagsParams);
+      expect(sendRequest).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -71,8 +71,8 @@ describe('AlbumService', () => {
 
     it('should call proxy with expected params', () => {
       album.getTopTags(getTopTagsParams);
-      expect(proxy).toHaveBeenCalledWith('album.getTopTags', { api_key, ...getTopTagsParams });
-      expect(proxy).toHaveBeenCalledTimes(1);
+      expect(sendRequest).toHaveBeenCalledWith('album.getTopTags', getTopTagsParams);
+      expect(sendRequest).toHaveBeenCalledTimes(1);
     });
   });
 });
