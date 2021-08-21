@@ -7,7 +7,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "start": "node dist",
+    "start": "npm run build && node dist",
     "test": "jest",
     "eslint": "eslint ./src/**/*.ts",
     "clean": "rm -rf dist",
