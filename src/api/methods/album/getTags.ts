@@ -9,6 +9,11 @@ export type AlbumTagsParams = AlbumParams & {
 export interface AlbumTagsResponseBody {
   tags: {
     tag: Tag[];
+    '#text': string;
+    '@attr': {
+      album: string;
+      artist: string;
+    };
   };
 }
 

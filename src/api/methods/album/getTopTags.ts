@@ -8,6 +8,10 @@ export type AlbumTopTagsParams = AlbumParams & {
 export interface AlbumTopTagsResponseBody {
   toptags: {
     tag: Tag[];
+    '@attr': {
+      album: string;
+      artist: string;
+    };
   };
 }
 

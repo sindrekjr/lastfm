@@ -11,22 +11,31 @@ export interface Album {
   id: number;
   mbid: string;
   url: string;
-  releaseDate: string;
-  image: Image[];
   listeners: number;
   playcount: number;
-  topTags: Tag[];
-  tracks: {
+  releasedate?: string;
+  image?: Image[];
+  toptags?: Tag[];
+  tracks?: {
     track: Track[];
   };
-  tags: {
+  tags?: {
     tag: Tag[];
   };
-  wiki: {
+  wiki?: {
     published: string;
     content: string;
     summary: string;
   };
+}
+
+export interface AlbumShort {
+  name: string;
+  artist: string;
+  mbid: string;
+  url: string;
+  streamable: string;
+  image?: string;
 }
 
 export interface Artist {
