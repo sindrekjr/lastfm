@@ -8,6 +8,6 @@ export type AlbumTopTagsParams = AlbumParams & {
 
 export const getTopTags = async (proxy: ApiProxy, params: AlbumTopTagsParams): Promise<Tag[]> => {
   const response = await proxy.sendRequest('album.getTopTags', params);
-  const { topTags } = await response.json();
-  return topTags;
+  const { toptags: { tag } } = await response.json();
+  return tag;
 };
