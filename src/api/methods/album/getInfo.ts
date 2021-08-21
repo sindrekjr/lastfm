@@ -1,5 +1,4 @@
-import { ApiProxy } from '../../proxy';
-import { Image, Tag, Track } from '../common';
+import { Album, MethodHandler } from '../common';
 import { AlbumParams } from './album.service';
 
 export type AlbumInfoParams = AlbumParams & {
@@ -8,35 +7,12 @@ export type AlbumInfoParams = AlbumParams & {
   lang?: string;
 };
 
-export interface AlbumInfoResponse {
-  name: string;
-  artist: string;
-  id: number;
-  mbid: string;
-  url: string;
-  releaseDate: string;
-  image: Image[];
-  listeners: number;
-  playcount: number;
-  topTags: Tag[];
-  tracks: {
-    track: Track[];
-  };
-  tags: {
-    tag: Tag[];
-  };
-  wiki: {
-    published: string;
-    content: string;
-    summary: string;
-  };
+export interface AlbumInfoResponseBody {
+  album: Album;
 }
 
-export const getInfo = async (
-  proxy: ApiProxy,
-  params: AlbumInfoParams,
-): Promise<AlbumInfoResponse> => {
+export const getInfo: MethodHandler<AlbumInfoParams, Album> = async (proxy, params) => {
   const response = await proxy.sendRequest('album.getInfo', params);
-  const { album } = await response.json();
+  const { album } = await response.json() as AlbumInfoResponseBody;
   return album;
 };

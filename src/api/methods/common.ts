@@ -1,6 +1,33 @@
+import { ApiProxy, Params } from '../proxy';
 import { AlbumMethod } from './album';
 
 export type Method = AlbumMethod;
+
+export type MethodHandler<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
+
+export interface Album {
+  name: string;
+  artist: string;
+  id: number;
+  mbid: string;
+  url: string;
+  releaseDate: string;
+  image: Image[];
+  listeners: number;
+  playcount: number;
+  topTags: Tag[];
+  tracks: {
+    track: Track[];
+  };
+  tags: {
+    tag: Tag[];
+  };
+  wiki: {
+    published: string;
+    content: string;
+    summary: string;
+  };
+}
 
 export interface Artist {
   name: string;

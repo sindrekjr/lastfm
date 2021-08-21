@@ -1,13 +1,18 @@
 import { AlbumParams } from '.';
-import { ApiProxy } from '../../proxy';
-import { Tag } from '../common';
+import { MethodHandler, Tag } from '../common';
 
 export type AlbumTopTagsParams = AlbumParams & {
   autocorrect?: string;
 };
 
-export const getTopTags = async (proxy: ApiProxy, params: AlbumTopTagsParams): Promise<Tag[]> => {
+export interface AlbumTopTagsResponseBody {
+  toptags: {
+    tag: Tag[];
+  };
+}
+
+export const getTopTags: MethodHandler<AlbumTopTagsParams, Tag[]> = async (proxy, params) => {
   const response = await proxy.sendRequest('album.getTopTags', params);
-  const { toptags: { tag } } = await response.json();
+  const { toptags: { tag } } = await response.json() as AlbumTopTagsResponseBody;
   return tag;
 };
