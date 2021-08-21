@@ -1,7 +1,8 @@
 import { ApiProxy, Params } from '../proxy';
 import { AlbumMethod } from './album';
+import { AuthMethod } from './auth';
 
-export type Method = AlbumMethod;
+export type Method = AlbumMethod | AuthMethod;
 
 export type MethodHandler<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
 
