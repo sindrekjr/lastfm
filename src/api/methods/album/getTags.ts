@@ -1,6 +1,6 @@
-import { AlbumParams } from ".";
-import { Tag } from "../common";
-import { ApiProxy } from "../../proxy";
+import { AlbumParams } from '.';
+import { Tag } from '../common';
+import { ApiProxy } from '../../proxy';
 
 export type AlbumTagsParams = AlbumParams & {
   autocorrect?: string;

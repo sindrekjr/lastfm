@@ -15,14 +15,33 @@ plugins:
   - 'jest'
 rules:
   '@typescript-eslint/no-inferrable-types': 0
-  'arrow-spacing': error
-  'indent': 
+  arrow-body-style:
+    - error
+    - as-needed
+  arrow-spacing: error
+  comma-dangle:
+    - error
+    - always-multiline
+  eol-last:
+    - error
+    - always
+  indent:
     - error
     - 2
-    - 'SwitchCase': 1
-  'keyword-spacing': error
-  'no-trailing-spaces': error
-  'prefer-const': error
-  'semi': 
+    - SwitchCase: 1
+  key-spacing: error
+  keyword-spacing: error
+  max-len:
+    - error
+    - 100
+  max-lines:
+    - error
+    - 200
+  no-trailing-spaces: error
+  prefer-const: error
+  quotes:
+    - error
+    - single
+  semi:
     - error
     - always
