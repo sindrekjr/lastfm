@@ -1,3 +1,7 @@
+import { AlbumMethod } from './album';
+
+export type Method = AlbumMethod;
+
 export interface Artist {
   name: string;
   mbid: string;

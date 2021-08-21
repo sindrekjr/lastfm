@@ -1,3 +1,5 @@
+import { Method } from '../methods';
+
 export interface Params extends Record<string, number | string | undefined> {
   api_key?: string;
 }
@@ -32,7 +34,7 @@ export class ApiProxy {
     this.userAgent = userAgent;
   }
 
-  public sendRequest = async (method: string, params: Params): Promise<Response> => (
+  public sendRequest = async (method: Method, params: Params): Promise<Response> => (
     await fetch(`${this.baseUrl}?${this.getQueryParams(method, params).toString()}`, {
       headers: this.getHeaders(),
     })
