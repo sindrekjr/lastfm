@@ -1,4 +1,4 @@
-import { AlbumService } from '../services';
+import { AlbumService } from '../methods';
 
 export class ApiClient {
   key: string;
