@@ -1,4 +1,5 @@
 import { ApiProxy, Params } from '../../proxy';
+import { BaseService } from '../service.class.base';
 import { AuthSessionParams, getSession } from './getSession';
 import { getToken } from './getToken';
 
@@ -13,11 +14,9 @@ export interface Session {
   subscriber: number;
 }
 
-export class AuthService {
-  private proxy: ApiProxy;
-
+export class AuthService extends BaseService {
   constructor(proxy: ApiProxy) {
-    this.proxy = proxy;
+    super(proxy);
   }
 
   public getSession = async (params: AuthSessionParams): Promise<Session> => (

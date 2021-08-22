@@ -1,5 +1,6 @@
 import { ApiProxy, Params } from '../../proxy';
 import { Album, AlbumShort, Tag } from '../common';
+import { BaseService } from '../service.class.base';
 
 import { AlbumInfoParams, getInfo } from './getInfo';
 import { AlbumTagsParams, getTags } from './getTags';
@@ -15,11 +16,9 @@ export type AlbumParams = Params & (
   }
 );
 
-export class AlbumService {
-  private proxy: ApiProxy;
-
+export class AlbumService extends BaseService {
   constructor(proxy: ApiProxy) {
-    this.proxy = proxy;
+    super(proxy);
   }
 
   public getInfo = async (params: AlbumInfoParams): Promise<Album> => (
