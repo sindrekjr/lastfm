@@ -1,11 +1,12 @@
 import { ApiProxy } from '../../proxy';
-import { ArtistShort } from '../common';
+import { ArtistShort, Tag } from '../common';
 import { BaseService } from '../service.base';
-import { addTags, ArtistAddTagsParams } from './addTags';
 
+import { addTags, ArtistAddTagsParams } from './addTags';
 import { ArtistCorrectionParams, getCorrection } from './getCorrection';
 import { Artist, ArtistInfoParams, getInfo } from './getInfo';
 import { ArtistSimilarParams, getSimilar, SimilarArtist } from './getSimilar';
+import { ArtistTagsParams, getTags } from './getTags';
 import { ArtistRemoveTagParams, removeTag } from './removeTag';
 
 export type ArtistMethod =
@@ -38,6 +39,10 @@ export class ArtistService extends BaseService {
 
   public getSimilar = async (params: ArtistSimilarParams): Promise<SimilarArtist[]> => (
     getSimilar(this.proxy, params)
+  );
+
+  public getTags = async (params: ArtistTagsParams): Promise<Tag[]> => (
+    getTags(this.proxy, params)
   );
 
   public removeTag = async (params: ArtistRemoveTagParams): Promise<boolean> => (
