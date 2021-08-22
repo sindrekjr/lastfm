@@ -3,6 +3,8 @@ import { BaseService } from '../service.base';
 import { AuthSessionParams, getSession } from './getSession';
 import { getToken } from './getToken';
 
+export type AuthMethod = 'auth.getSession' | 'auth.getToken';
+
 export type AuthParams = Params & {
   api_key?: string;
   api_sig?: string;

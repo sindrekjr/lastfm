@@ -7,6 +7,14 @@ import { AlbumTagsParams, getTags } from './getTags';
 import { AlbumTopTagsParams, getTopTags } from './getTopTags';
 import { AlbumSearchParams, search } from './search';
 
+export type AlbumMethod =
+  'album.addTags' |
+  'album.getInfo' |
+  'album.getTags' |
+  'album.getTopTags' |
+  'album.removeTag' |
+  'album.search';
+
 export type AlbumParams = Params & (
   {
     artist: string;
