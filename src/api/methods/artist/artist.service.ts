@@ -1,6 +1,7 @@
 import { ApiProxy, Params } from '../../proxy';
+import { Artist } from '../common';
 import { BaseService } from '../service.base';
-import { ArtistCorrectionParams, Correction, getCorrection } from './getCorrection';
+import { ArtistCorrectionParams, getCorrection } from './getCorrection';
 
 export type ArtistMethod =
   'artist.addTags' |
@@ -20,7 +21,7 @@ export class ArtistService extends BaseService {
     super(proxy);
   }
 
-  public getCorrection = async (params: ArtistCorrectionParams): Promise<Correction[]> => (
+  public getCorrection = async (params: ArtistCorrectionParams): Promise<Artist> => (
     getCorrection(this.proxy, params)
   );
 }

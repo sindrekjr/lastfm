@@ -1,10 +1,12 @@
 import { AlbumService, AuthService, Session } from '../methods';
+import { ArtistService } from '../methods/artist';
 import { ApiProxy, ApiProxyOptions } from '../proxy';
 
 export interface ApiClientOptions extends ApiProxyOptions {
   proxy?: ApiProxy;
   services?: {
     album?: AlbumService;
+    artist?: ArtistService;
     auth?: AuthService;
   };
 }
@@ -13,20 +15,16 @@ export class ApiClient {
   private proxy: ApiProxy;
 
   public album: AlbumService;
+  public artist: ArtistService;
   public auth: AuthService;
 
   constructor(options: ApiClientOptions) {
     const { proxy, services } = options;
     this.proxy = proxy || new ApiProxy(options);
 
-    if (services) {
-      const { album, auth } = services;
-      this.album = album || new AlbumService(this.proxy);
-      this.auth = auth || new AuthService(this.proxy);
-    } else {
-      this.album = new AlbumService(this.proxy);
-      this.auth = new AuthService(this.proxy);
-    }
+    this.album = services?.album || new AlbumService(this.proxy);
+    this.artist = services?.artist || new ArtistService(this.proxy);
+    this.auth = services?.auth || new AuthService(this.proxy);
   }
 
   public authenticate = async (): Promise<Session> => {
