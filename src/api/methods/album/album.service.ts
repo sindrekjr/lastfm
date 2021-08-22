@@ -1,8 +1,8 @@
 import { ApiProxy, Params } from '../../proxy';
-import { Album, AlbumShort, Tag } from '../common';
+import { AlbumShort, Tag } from '../common';
 import { BaseService } from '../service.base';
 
-import { AlbumInfoParams, getInfo } from './getInfo';
+import { Album, AlbumInfoParams, getInfo } from './getInfo';
 import { AlbumTagsParams, getTags } from './getTags';
 import { AlbumTopTagsParams, getTopTags } from './getTopTags';
 import { AlbumSearchParams, search } from './search';

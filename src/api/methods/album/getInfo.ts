@@ -1,4 +1,4 @@
-import { Album, MethodFunc } from '../common';
+import { AlbumShort, MethodFunc, Tag, Track } from '../common';
 import { AlbumParams } from './album.service';
 
 export type AlbumInfoParams = AlbumParams & {
@@ -6,6 +6,25 @@ export type AlbumInfoParams = AlbumParams & {
   username?: string;
   lang?: string;
 };
+
+export interface Album extends AlbumShort {
+  id: number;
+  listeners: number;
+  playcount: number;
+  releasedate?: string;
+  toptags?: Tag[];
+  tracks?: {
+    track: Track[];
+  };
+  tags?: {
+    tag: Tag[];
+  };
+  wiki?: {
+    published: string;
+    content: string;
+    summary: string;
+  };
+}
 
 export interface AlbumInfoResponseBody {
   album: Album;

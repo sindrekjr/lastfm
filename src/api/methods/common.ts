@@ -7,40 +7,16 @@ export type Method = AlbumMethod | ArtistMethod | AuthMethod;
 
 export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
 
-export interface Album {
-  name: string;
-  artist: string;
-  id: number;
-  mbid: string;
-  url: string;
-  listeners: number;
-  playcount: number;
-  releasedate?: string;
-  image?: Image[];
-  toptags?: Tag[];
-  tracks?: {
-    track: Track[];
-  };
-  tags?: {
-    tag: Tag[];
-  };
-  wiki?: {
-    published: string;
-    content: string;
-    summary: string;
-  };
-}
-
 export interface AlbumShort {
   name: string;
   artist: string;
   mbid: string;
   url: string;
-  streamable: string;
-  image?: string;
+  streamable?: string;
+  image?: Image[];
 }
 
-export interface Artist {
+export interface ArtistShort {
   name: string;
   mbid: string;
   url: string;
@@ -58,7 +34,7 @@ export interface Tag {
 }
 
 export interface Track {
-  artist: Artist;
+  artist: ArtistShort;
   duration: number;
   url: string;
   name: string;
