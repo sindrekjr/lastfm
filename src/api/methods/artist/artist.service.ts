@@ -5,12 +5,14 @@ import { addTags, ArtistAddTagsParams } from './addTags';
 
 import { ArtistCorrectionParams, getCorrection } from './getCorrection';
 import { Artist, ArtistInfoParams, getInfo } from './getInfo';
+import { ArtistSimilarParams, getSimilar, SimilarArtist } from './getSimilar';
 import { ArtistRemoveTagParams, removeTag } from './removeTag';
 
 export type ArtistMethod =
   'artist.addTags' |
   'artist.getCorrection' |
   'artist.getInfo' |
+  'artist.getSimilar' |
   'artist.getTags' |
   'artist.getTopAlbums' |
   'artist.getTopTags' |
@@ -32,6 +34,10 @@ export class ArtistService extends BaseService {
 
   public getInfo = async (params: ArtistInfoParams): Promise<Artist> => (
     getInfo(this.proxy, params)
+  );
+
+  public getSimilar = async (params: ArtistSimilarParams): Promise<SimilarArtist[]> => (
+    getSimilar(this.proxy, params)
   );
 
   public removeTag = async (params: ArtistRemoveTagParams): Promise<boolean> => (
