@@ -5,6 +5,7 @@ import { addTags, ArtistAddTagsParams } from './addTags';
 
 import { ArtistCorrectionParams, getCorrection } from './getCorrection';
 import { Artist, ArtistInfoParams, getInfo } from './getInfo';
+import { ArtistRemoveTagParams, removeTag } from './removeTag';
 
 export type ArtistMethod =
   'artist.addTags' |
@@ -31,5 +32,9 @@ export class ArtistService extends BaseService {
 
   public getInfo = async (params: ArtistInfoParams): Promise<Artist> => (
     getInfo(this.proxy, params)
+  );
+
+  public removeTag = async (params: ArtistRemoveTagParams): Promise<boolean> => (
+    removeTag(this.proxy, params)
   );
 }
