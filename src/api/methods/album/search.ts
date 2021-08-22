@@ -1,7 +1,7 @@
 import { Params } from '../../proxy';
 import { AlbumShort, MethodFunc } from '../common';
 
-export type AlbumSearchParams = Params & {
+export interface AlbumSearchParams extends Params {
   album: string;
   limit?: number;
   page?: number;

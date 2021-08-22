@@ -1,11 +1,18 @@
+import { Params } from '../../proxy';
 import { AlbumShort, MethodFunc, Tag, Track } from '../common';
-import { AlbumParams } from './album.service';
 
-export type AlbumInfoParams = AlbumParams & {
+export type AlbumInfoParams = Params & (
+  {
+    artist: string;
+    album: string;
+  } | {
+    mbid: string;
+  }
+) & {
   autocorrect?: number;
   username?: string;
   lang?: string;
-};
+}
 
 export interface Album extends AlbumShort {
   id: number;

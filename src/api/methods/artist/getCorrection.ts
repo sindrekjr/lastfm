@@ -1,7 +1,9 @@
 import { Params } from '../../proxy';
 import { ArtistShort, MethodFunc } from '../common';
 
-export type ArtistCorrectionParams = Params;
+export interface ArtistCorrectionParams extends Params {
+  arist: string;
+}
 
 interface ArtistCorrectionResponseBody {
   corrections: {

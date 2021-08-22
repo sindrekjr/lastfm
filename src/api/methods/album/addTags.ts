@@ -1,9 +1,11 @@
+import { Params } from '../../proxy';
 import { MethodFunc } from '../common';
-import { AlbumParams } from './album.service';
 
-export type AlbumAddTagsParams = AlbumParams & {
+export interface AlbumAddTagsParams extends Params {
+  artist: string;
+  album: string;
   tags: string | string[];
-};
+}
 
 const mapParams = (params: AlbumAddTagsParams) => ({
   ...params,

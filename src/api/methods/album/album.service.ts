@@ -1,8 +1,8 @@
-import { ApiProxy, Params } from '../../proxy';
+import { ApiProxy } from '../../proxy';
 import { AlbumShort, Tag } from '../common';
 import { BaseService } from '../service.base';
-import { addTags, AlbumAddTagsParams } from './addTags';
 
+import { addTags, AlbumAddTagsParams } from './addTags';
 import { Album, AlbumInfoParams, getInfo } from './getInfo';
 import { AlbumTagsParams, getTags } from './getTags';
 import { AlbumTopTagsParams, getTopTags } from './getTopTags';
@@ -16,15 +16,6 @@ export type AlbumMethod =
   'album.getTopTags' |
   'album.removeTag' |
   'album.search';
-
-export type AlbumParams = Params & (
-  {
-    artist: string;
-    album: string;
-  } | {
-    mbid: string;
-  }
-);
 
 export class AlbumService extends BaseService {
   constructor(proxy: ApiProxy) {

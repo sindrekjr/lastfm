@@ -1,8 +1,15 @@
-import { AlbumParams } from '.';
-import { MethodFunc, Tag } from '../common';
+import { Params } from '../../proxy';
+import { BoolStr, MethodFunc, Tag } from '../common';
 
-export type AlbumTopTagsParams = AlbumParams & {
-  autocorrect?: string;
+export type AlbumTopTagsParams = Params & (
+  {
+    artist: string;
+    album: string;
+  } | {
+    mbid: string;
+  }
+) & {
+  autocorrect?: BoolStr;
 };
 
 export interface AlbumTopTagsResponseBody {

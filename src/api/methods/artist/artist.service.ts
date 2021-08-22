@@ -14,14 +14,6 @@ export type ArtistMethod =
   'artist.removeTag' |
   'artist.search';
 
-export type ArtistParams = Params & (
-  {
-    artist: string;
-  } | {
-    mbid: string;
-  }
-);
-
 export class ArtistService extends BaseService {
   constructor(proxy: ApiProxy) {
     super(proxy);

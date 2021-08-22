@@ -1,11 +1,12 @@
+import { Params } from '../../proxy';
 import { ArtistShort, BoolStr, Image, MethodFunc, Tag } from '../common';
-import { ArtistParams } from './artist.service';
 
-export type ArtistInfoParams = ArtistParams & {
+export interface ArtistInfoParams extends Params {
+  artist: string;
   lang?: string;
-  autcorrect?: number;
+  autcorrect?: BoolStr;
   username?: string;
-};
+}
 
 export interface Artist extends ArtistShort {
   image: Image[];
