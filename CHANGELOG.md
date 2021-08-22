@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.4.0](https://github.com/sindrekjr/lastfm/tree/v0.4.0)
+
+#### 2021-08-23
+- 🎉 Added `ChartService` and completed all methods.
+
 ## [v0.3.0](https://github.com/sindrekjr/lastfm/tree/v0.3.0)
 
 #### 2021-08-22
