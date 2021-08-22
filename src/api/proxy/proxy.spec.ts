@@ -21,11 +21,11 @@ describe('ApiProxy', () => {
       },
       [
         'https://ws.audioscrobbler.com/2.0/'
-        + '?api_key=testApiKey'
+        + '?album=Jagged+Little+Pill'
+        + '&artist=Alanis+Morissette'
+        + '&api_key=testApiKey'
         + '&format=json'
-        + '&method=album.getInfo'
-        + '&album=Jagged+Little+Pill'
-        + '&artist=Alanis+Morissette',
+        + '&method=album.getInfo',
         {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
