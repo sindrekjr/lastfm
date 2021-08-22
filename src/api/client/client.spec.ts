@@ -2,7 +2,7 @@ import { ApiClient } from './client.class';
 
 describe('ApiClient', () => {
   const apiKey = 'testApiKey';
-  const sharedSecret = 'testSharedSecret';
+  const secret = 'testSharedSecret';
 
-  it('should not throw', () => expect(() => new ApiClient({ apiKey, sharedSecret })).not.toThrow());
+  it('should not throw', () => expect(() => new ApiClient({ apiKey, secret })).not.toThrow());
 });
