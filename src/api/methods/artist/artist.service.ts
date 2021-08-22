@@ -11,6 +11,7 @@ import { ArtistTopAlbumsParams, getTopAlbums } from './getTopAlbums';
 import { ArtistTopTagsParams, getTopTags } from './getTopTags';
 import { ArtistTopTracksParams, getTopTracks } from './getTopTracks';
 import { ArtistRemoveTagParams, removeTag } from './removeTag';
+import { ArtistSearchParams, ArtistSearchResult, search } from './search';
 
 export type ArtistMethod =
   'artist.addTags' |
@@ -63,5 +64,9 @@ export class ArtistService extends BaseService {
 
   public removeTag = async (params: ArtistRemoveTagParams): Promise<boolean> => (
     removeTag(this.proxy, params)
+  );
+
+  public search = async (params: ArtistSearchParams): Promise<ArtistSearchResult[]> => (
+    search(this.proxy, params)
   );
 }
