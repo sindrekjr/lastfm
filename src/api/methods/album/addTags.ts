@@ -5,9 +5,15 @@ export type AlbumAddTagsParams = AlbumParams & {
   tags: string | string[];
 };
 
-export const addTags: MethodFunc<AlbumAddTagsParams, string> = async (proxy, params) => {
-  throw new Error('Not yet implemented');
+const mapParams = (params: AlbumAddTagsParams) => ({
+  ...params,
+  tags: typeof params.tags === 'string'
+    ? params.tags
+    : params.tags.join(','),
+});
 
-  const response = await proxy.sendPostRequest('album.addTags', params);
-  return await response.text();
+export const addTags: MethodFunc<AlbumAddTagsParams, boolean> = async (proxy, params) => {
+  // Currently always returns 200 OK unless request is invalid.
+  const { status } = await proxy.sendPostRequest('album.addTags', mapParams(params));
+  return status === 200;
 };

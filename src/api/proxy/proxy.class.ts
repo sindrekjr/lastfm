@@ -14,16 +14,6 @@ export interface ApiProxyOptions {
   userAgent?: string;
 }
 
-// const signMethod = (method: Method, params: Params, key: string, secret: string): string => {
-//   const sorted = Object.entries(params)
-//     .filter(e => !['callback', 'format'].includes(e[0]))
-//     .sort((a, b) => a[0] < b[0] ? -1 : 1);
-
-//   const md5 = createHash('md5');
-//   md5.update(`api_key${key}${sorted.map(p => p.join('')).join('')}${secret}`);
-//   return md5.digest('hex');
-// };
-
 export class ApiProxy {
   private baseUrl: string = 'https://ws.audioscrobbler.com/2.0/';
   private apiKey: string;
@@ -53,14 +43,12 @@ export class ApiProxy {
 
   private getQueryParams = (method: Method, params: Params, sign = false): URLSearchParams => {
     if (sign) {
-      if (!this.secret) throw new Error('Unable to sign without a secret.');
-
       return new URLSearchParams({
         ...params,
+        method,
         api_key: this.apiKey,
         api_sig: this.signMethod(method, params),
         format: this.format,
-        method,
       });
     }
 
@@ -73,13 +61,14 @@ export class ApiProxy {
   };
 
   private signMethod = (method: Method, params: Params): string => {
-    const sorted = Object.entries({ ...params, method })
+    if (!this.secret) throw new Error('Unable to sign method without a secret.');
+
+    const sorted = Object.entries({ ...params, method, api_key: this.apiKey })
       .filter(e => !['callback', 'format'].includes(e[0]))
       .sort((a, b) => a[0] < b[0] ? -1 : 1);
 
     const md5 = createHash('md5');
-    md5.update(`api_key${this.apiKey}${sorted.map(p => p.join('')).join('')}${this.secret}`);
-    return md5.digest('hex');
+    return md5.update(`${sorted.map(p => p.join('')).join('')}${this.secret}`).digest('hex');
   };
 
   public sendRequest = async (method: Method, params: Params, sign = false): Promise<Response> => (
@@ -93,11 +82,8 @@ export class ApiProxy {
 
     return await fetch(this.baseUrl, {
       method: 'POST',
-      body: this.getQueryParams(method, { ...params, sk: this.sessionKey }, true),
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': this.userAgent,
-      },
+      body: this.getQueryParams(method, { ...params, sk: this.sessionKey }, true).toString(),
+      headers: this.getHeaders(),
     });
   }
 }

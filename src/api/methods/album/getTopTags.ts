@@ -18,5 +18,5 @@ export interface AlbumTopTagsResponseBody {
 export const getTopTags: MethodFunc<AlbumTopTagsParams, Tag[]> = async (proxy, params) => {
   const response = await proxy.sendRequest('album.getTopTags', params);
   const { toptags: { tag } } = await response.json() as AlbumTopTagsResponseBody;
-  return tag;
+  return tag || [];
 };
