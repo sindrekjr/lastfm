@@ -11,9 +11,11 @@ export type BoolStr = '0' | '1';
 
 export interface AlbumShort {
   name: string;
-  artist: string;
+  artist: string | ArtistShort;
   mbid: string;
   url: string;
+  listeners?: number;
+  playcount?: number;
   streamable?: BoolStr;
   image?: Image[];
 }
