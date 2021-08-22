@@ -9,21 +9,19 @@ export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Pr
 
 export type BoolStr = '0' | '1';
 
-export interface AlbumShort {
+export interface Album {
   name: string;
-  artist: string | ArtistShort;
+  artist: string | Artist;
   mbid: string;
   url: string;
-  listeners?: number;
-  playcount?: number;
-  streamable?: BoolStr;
   image?: Image[];
 }
 
-export interface ArtistShort {
+export interface Artist {
   name: string;
-  mbid: string;
   url: string;
+  mbid?: string;
+  image?: Image[];
 }
 
 export interface Image {
@@ -38,7 +36,7 @@ export interface Tag {
 }
 
 export interface Track {
-  artist: ArtistShort;
+  artist: Artist;
   duration: number;
   url: string;
   name: string;

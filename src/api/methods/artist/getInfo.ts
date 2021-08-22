@@ -1,5 +1,5 @@
 import { Params } from '../../proxy';
-import { ArtistShort, BoolStr, Image, MethodFunc, Tag } from '../common';
+import { Artist, BoolStr, Image, MethodFunc, Tag } from '../common';
 
 export interface ArtistInfoParams extends Params {
   artist: string;
@@ -8,16 +8,16 @@ export interface ArtistInfoParams extends Params {
   username?: string;
 }
 
-export interface Artist extends ArtistShort {
+export interface ArtistInfo extends Artist {
   image: Image[];
   streamable: BoolStr;
   ontour: BoolStr;
   stats: {
     listeners: string;
-    plays: string;
+    playcount: string;
   };
   similar: {
-    artist: ArtistShort[];
+    artist: Artist[];
   };
   tags: {
     tag: Tag[];
@@ -37,13 +37,13 @@ export interface Artist extends ArtistShort {
 }
 
 interface ArtistInfoResponseBody {
-  artist: Artist;
+  artist: ArtistInfo;
 }
 
-export const getInfo: MethodFunc<ArtistInfoParams, Artist> = async (
+export const getInfo: MethodFunc<ArtistInfoParams, ArtistInfo> = async (
   proxy,
   params,
-): Promise<Artist> => {
+): Promise<ArtistInfo> => {
   const response = await proxy.sendRequest('artist.getInfo', params);
   const { artist } = await response.json() as ArtistInfoResponseBody;
   return artist;

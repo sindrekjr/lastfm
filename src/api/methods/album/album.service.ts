@@ -1,9 +1,9 @@
 import { ApiProxy } from '../../proxy';
-import { AlbumShort, Tag } from '../common';
+import { Album, Tag } from '../common';
 import { BaseService } from '../service.base';
 
 import { addTags, AlbumAddTagsParams } from './addTags';
-import { Album, AlbumInfoParams, getInfo } from './getInfo';
+import { AlbumInfo, AlbumInfoParams, getInfo } from './getInfo';
 import { AlbumTagsParams, getTags } from './getTags';
 import { AlbumTopTagsParams, getTopTags } from './getTopTags';
 import { AlbumRemoveTagParams, removeTag } from './removeTag';
@@ -26,7 +26,7 @@ export class AlbumService extends BaseService {
     addTags(this.proxy, params)
   );
 
-  public getInfo = async (params: AlbumInfoParams): Promise<Album> => (
+  public getInfo = async (params: AlbumInfoParams): Promise<AlbumInfo> => (
     getInfo(this.proxy, params)
   );
 
@@ -42,7 +42,7 @@ export class AlbumService extends BaseService {
     removeTag(this.proxy, params)
   );
 
-  public search = async (params: AlbumSearchParams): Promise<AlbumShort[]> => (
+  public search = async (params: AlbumSearchParams): Promise<Album[]> => (
     search(this.proxy, params)
   );
 }

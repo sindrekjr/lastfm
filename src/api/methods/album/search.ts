@@ -1,10 +1,15 @@
 import { Params } from '../../proxy';
-import { AlbumShort, MethodFunc } from '../common';
+import { Album, BoolStr, MethodFunc } from '../common';
 
 export interface AlbumSearchParams extends Params {
   album: string;
   limit?: number;
   page?: number;
+}
+
+export interface AlbumSearchResult extends Album {
+  artist: string;
+  streamable: BoolStr;
 }
 
 export interface AlbumSearchResponseBody {
@@ -19,7 +24,7 @@ export interface AlbumSearchResponseBody {
     'opensearch:startIndex': string;
     'opensearch:itemsPerPage': string;
     albummatches: {
-      album: AlbumShort[];
+      album: AlbumSearchResult[];
     };
     '@attr': {
       for: string;
@@ -27,7 +32,7 @@ export interface AlbumSearchResponseBody {
   }
 }
 
-export const search: MethodFunc<AlbumSearchParams, AlbumShort[]> = async (proxy, params) => {
+export const search: MethodFunc<AlbumSearchParams, AlbumSearchResult[]> = async (proxy, params) => {
   const response = await proxy.sendRequest('album.search', params);
   const { results: { albummatches: { album } } } = await response.json() as AlbumSearchResponseBody;
   return album;

@@ -1,5 +1,5 @@
 import { Params } from '../../proxy';
-import { ArtistShort, BoolStr, MethodFunc } from '../common';
+import { Artist, BoolStr, MethodFunc } from '../common';
 
 export type ArtistSimilarParams = Params & (
   { artist: string } | { mbid: string }
@@ -8,8 +8,9 @@ export type ArtistSimilarParams = Params & (
   limit?: number;
 };
 
-export interface SimilarArtist extends ArtistShort {
+export interface SimilarArtist extends Artist {
   match: string;
+  streamable: BoolStr;
 }
 
 interface ArtistSimilarResponseBody {

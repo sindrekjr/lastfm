@@ -1,5 +1,5 @@
 import { Params } from '../../proxy';
-import { AlbumShort, MethodFunc, Tag, Track } from '../common';
+import { Album, MethodFunc, Tag, Track } from '../common';
 
 export type AlbumInfoParams = Params & (
   {
@@ -14,7 +14,7 @@ export type AlbumInfoParams = Params & (
   lang?: string;
 }
 
-export interface Album extends AlbumShort {
+export interface AlbumInfo extends Album {
   id: number;
   listeners: number;
   playcount: number;
@@ -34,10 +34,10 @@ export interface Album extends AlbumShort {
 }
 
 export interface AlbumInfoResponseBody {
-  album: Album;
+  album: AlbumInfo;
 }
 
-export const getInfo: MethodFunc<AlbumInfoParams, Album> = async (proxy, params) => {
+export const getInfo: MethodFunc<AlbumInfoParams, AlbumInfo> = async (proxy, params) => {
   const response = await proxy.sendRequest('album.getInfo', params);
   const { album } = await response.json() as AlbumInfoResponseBody;
   return album;

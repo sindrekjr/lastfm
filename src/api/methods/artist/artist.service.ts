@@ -1,10 +1,10 @@
 import { ApiProxy } from '../../proxy';
-import { AlbumShort, ArtistShort, Tag } from '../common';
+import { Album, Artist, Tag } from '../common';
 import { BaseService } from '../service.base';
 
 import { addTags, ArtistAddTagsParams } from './addTags';
 import { ArtistCorrectionParams, getCorrection } from './getCorrection';
-import { Artist, ArtistInfoParams, getInfo } from './getInfo';
+import { ArtistInfo, ArtistInfoParams, getInfo } from './getInfo';
 import { ArtistSimilarParams, getSimilar, SimilarArtist } from './getSimilar';
 import { ArtistTagsParams, getTags } from './getTags';
 import { ArtistTopAlbumsParams, getTopAlbums } from './getTopAlbums';
@@ -30,11 +30,11 @@ export class ArtistService extends BaseService {
     addTags(this.proxy, params)
   );
 
-  public getCorrection = async (params: ArtistCorrectionParams): Promise<ArtistShort> => (
+  public getCorrection = async (params: ArtistCorrectionParams): Promise<Artist> => (
     getCorrection(this.proxy, params)
   );
 
-  public getInfo = async (params: ArtistInfoParams): Promise<Artist> => (
+  public getInfo = async (params: ArtistInfoParams): Promise<ArtistInfo> => (
     getInfo(this.proxy, params)
   );
 
@@ -46,7 +46,7 @@ export class ArtistService extends BaseService {
     getTags(this.proxy, params)
   );
 
-  public getTopAlbums = async (params: ArtistTopAlbumsParams): Promise<AlbumShort[]> => (
+  public getTopAlbums = async (params: ArtistTopAlbumsParams): Promise<Album[]> => (
     getTopAlbums(this.proxy, params)
   );
 

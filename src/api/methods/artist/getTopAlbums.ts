@@ -1,5 +1,5 @@
 import { Params } from '../../proxy';
-import { AlbumShort, BoolStr, MethodFunc } from '../common';
+import { Album, Artist, BoolStr, MethodFunc } from '../common';
 
 export type ArtistTopAlbumsParams = Params & (
   { artist: string } | { mbid: string }
@@ -9,9 +9,14 @@ export type ArtistTopAlbumsParams = Params & (
   limit?: number;
 };
 
+export interface TopAlbum extends Album {
+  artist: Artist;
+  playcount: number;
+}
+
 interface ArtistTopAlbumsResponseBody {
   topalbums: {
-    album: AlbumShort[];
+    album: TopAlbum[];
     '#text': string;
     '@attr': {
       artist: string;
@@ -23,10 +28,10 @@ interface ArtistTopAlbumsResponseBody {
   }
 }
 
-export const getTopAlbums: MethodFunc<ArtistTopAlbumsParams, AlbumShort[]> = async (
+export const getTopAlbums: MethodFunc<ArtistTopAlbumsParams, TopAlbum[]> = async (
   proxy,
   params,
-): Promise<AlbumShort[]> => {
+) => {
   const response = await proxy.sendRequest('artist.getTopAlbums', params);
   const { topalbums: { album } } = await response.json() as ArtistTopAlbumsResponseBody;
   return album;
