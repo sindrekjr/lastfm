@@ -37,11 +37,19 @@ export interface Tag {
 
 export interface Track {
   artist: Artist;
-  duration: number;
+  duration?: number;
   url: string;
   name: string;
-  streamable: {
+  streamable: BoolStr | {
     fulltrack: BoolStr;
     '#text': BoolStr;
   }
+}
+
+export interface TrackInfo extends Track {
+  playcount: string;
+  listeners: string;
+  mbid: string;
+  streamable: BoolStr;
+  image: Image[];
 }

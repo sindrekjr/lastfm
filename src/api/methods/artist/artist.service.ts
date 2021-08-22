@@ -1,5 +1,5 @@
 import { ApiProxy } from '../../proxy';
-import { Album, Artist, Tag } from '../common';
+import { Album, Artist, Tag, Track } from '../common';
 import { BaseService } from '../service.base';
 
 import { addTags, ArtistAddTagsParams } from './addTags';
@@ -9,6 +9,7 @@ import { ArtistSimilarParams, getSimilar, SimilarArtist } from './getSimilar';
 import { ArtistTagsParams, getTags } from './getTags';
 import { ArtistTopAlbumsParams, getTopAlbums } from './getTopAlbums';
 import { ArtistTopTagsParams, getTopTags } from './getTopTags';
+import { ArtistTopTracksParams, getTopTracks } from './getTopTracks';
 import { ArtistRemoveTagParams, removeTag } from './removeTag';
 
 export type ArtistMethod =
@@ -19,6 +20,7 @@ export type ArtistMethod =
   'artist.getTags' |
   'artist.getTopAlbums' |
   'artist.getTopTags' |
+  'artist.getTopTracks' |
   'artist.removeTag' |
   'artist.search';
 
@@ -53,6 +55,10 @@ export class ArtistService extends BaseService {
 
   public getTopTags = async (params: ArtistTopTagsParams): Promise<Tag[]> => (
     getTopTags(this.proxy, params)
+  );
+
+  public getTopTracks = async (params: ArtistTopTracksParams): Promise<Track[]> => (
+    getTopTracks(this.proxy, params)
   );
 
   public removeTag = async (params: ArtistRemoveTagParams): Promise<boolean> => (
