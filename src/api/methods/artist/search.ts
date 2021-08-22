@@ -37,7 +37,6 @@ export const search: MethodFunc<ArtistSearchParams, ArtistSearchResult[]> = asyn
   params,
 ) => {
   const response = await proxy.sendRequest('artist.search', params);
-  // return await response.json();
   const { results: {
     artistmatches: { artist },
   }} = await response.json() as ArtistSearchResponseBody;

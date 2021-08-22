@@ -1,13 +1,31 @@
-import { ApiProxy } from '../../proxy';
+import { ApiProxy, Params } from '../../proxy';
+import { Method } from '../common';
 import { AlbumService } from './album.service';
 
 describe('AlbumService', () => {
   const apiKey = 'testApiKey';
   const proxy = new ApiProxy({ apiKey });
-  const album = new AlbumService(proxy);
+  const service = new AlbumService(proxy);
   const sendRequest = jest.spyOn(proxy, 'sendRequest');
 
   afterEach(() => jest.clearAllMocks());
+
+  const commonMethodSuccessTests = <P extends Params>(
+    method: Method,
+    params: P,
+    call: (params: P) => void,
+  ) => {
+    beforeEach(() => call(params));
+
+    it('should call fetch', () => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call proxy with expected parms', () => {
+      expect(sendRequest).toHaveBeenCalledWith(method, params);
+      expect(sendRequest).toHaveBeenCalledTimes(1);
+    });
+  };
 
 
   /**
@@ -21,23 +39,9 @@ describe('AlbumService', () => {
     });
 
     describe.each([
-      [
-        {
-          album: 'Believe',
-          artist: 'Cher',
-        },
-      ],
+      [{ album: 'Believe', artist: 'Cher' }],
     ])('success', getInfoParams => {
-      it('should call fetch', () => {
-        album.getInfo(getInfoParams);
-        expect(fetch).toHaveBeenCalledTimes(1);
-      });
-
-      it('should call proxy with expected params', () => {
-        album.getInfo(getInfoParams);
-        expect(sendRequest).toHaveBeenCalledWith('album.getInfo', getInfoParams);
-        expect(sendRequest).toHaveBeenCalledTimes(1);
-      });
+      commonMethodSuccessTests('album.getInfo', getInfoParams, service.getInfo);
     });
   });
 
@@ -53,24 +57,9 @@ describe('AlbumService', () => {
     });
 
     describe.each([
-      [
-        {
-          album: 'Believe',
-          artist: 'Cher',
-          user: 'NotAnActualUser',
-        },
-      ],
+      [{ album: 'Believe', artist: 'Cher', user: 'NotAnActualUser' }],
     ])('success', getTagsParams => {
-      it('should call fetch', () => {
-        album.getTags(getTagsParams);
-        expect(fetch).toHaveBeenCalledTimes(1);
-      });
-
-      it('should call proxy with expected params', () => {
-        album.getTags(getTagsParams);
-        expect(sendRequest).toHaveBeenCalledWith('album.getTags', getTagsParams);
-        expect(sendRequest).toHaveBeenCalledTimes(1);
-      });
+      commonMethodSuccessTests('album.getTags', getTagsParams, service.getTags);
     });
   });
 
@@ -86,23 +75,9 @@ describe('AlbumService', () => {
     });
 
     describe.each([
-      [
-        {
-          album: 'The Bends',
-          artist: 'Radioherad',
-        },
-      ],
+      [{ album: 'The Bends', artist: 'Radioherad' }],
     ])('success', getTopTagsParams => {
-      it('should call fetch', () => {
-        album.getTopTags(getTopTagsParams);
-        expect(fetch).toHaveBeenCalledTimes(1);
-      });
-
-      it('should call proxy with expected params', () => {
-        album.getTopTags(getTopTagsParams);
-        expect(sendRequest).toHaveBeenCalledWith('album.getTopTags', getTopTagsParams);
-        expect(sendRequest).toHaveBeenCalledTimes(1);
-      });
+      commonMethodSuccessTests('album.getTopTags', getTopTagsParams, service.getTopTags);
     });
   });
 
@@ -118,20 +93,9 @@ describe('AlbumService', () => {
     });
 
     describe.each([
-      [
-        { album: 'Hocus Pocus' },
-      ],
+      [{ album: 'Hocus Pocus' }],
     ])('success', searchParams => {
-      it('should call fetch', () => {
-        album.search(searchParams);
-        expect(fetch).toHaveBeenCalledTimes(1);
-      });
-
-      it('should call proxy with expected params', () => {
-        album.search(searchParams);
-        expect(sendRequest).toHaveBeenCalledWith('album.search', searchParams);
-        expect(sendRequest).toHaveBeenCalledTimes(1);
-      });
+      commonMethodSuccessTests('album.search', searchParams, service.search);
     });
   });
 });
