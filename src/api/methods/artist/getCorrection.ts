@@ -1,12 +1,12 @@
 import { Params } from '../../proxy';
-import { Artist, MethodFunc } from '../common';
+import { ArtistShort, MethodFunc } from '../common';
 
 export type ArtistCorrectionParams = Params;
 
 interface ArtistCorrectionResponseBody {
   corrections: {
     correction: {
-      artist: Artist;
+      artist: ArtistShort;
       '@attr': {
         index: string;
       };
@@ -14,7 +14,7 @@ interface ArtistCorrectionResponseBody {
   };
 }
 
-export const getCorrection: MethodFunc<ArtistCorrectionParams, Artist> = async (
+export const getCorrection: MethodFunc<ArtistCorrectionParams, ArtistShort> = async (
   proxy,
   params,
 ) => {
