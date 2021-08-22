@@ -2,8 +2,9 @@ import { ApiProxy, Params } from '../proxy';
 import { AlbumMethod } from './album';
 import { ArtistMethod } from './artist';
 import { AuthMethod } from './auth';
+import { ChartMethod } from './chart';
 
-export type Method = AlbumMethod | ArtistMethod | AuthMethod;
+export type Method = AlbumMethod | ArtistMethod | AuthMethod | ChartMethod;
 
 export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
 
