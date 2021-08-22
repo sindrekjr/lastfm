@@ -4,4 +4,5 @@ export type AlbumMethod =
   'album.getInfo' |
   'album.getTags' |
   'album.getTopTags' |
+  'album.removeTag' |
   'album.search';
