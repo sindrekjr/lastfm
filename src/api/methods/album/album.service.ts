@@ -1,5 +1,6 @@
 import { ApiProxy, Params } from '../../proxy';
 import { Album, AlbumShort, Tag } from '../common';
+import { addTags, AlbumAddTagsParams } from './addTags';
 
 import { AlbumInfoParams, getInfo } from './getInfo';
 import { AlbumTagsParams, getTags } from './getTags';
@@ -21,6 +22,10 @@ export class AlbumService {
   constructor(proxy: ApiProxy) {
     this.proxy = proxy;
   }
+
+  public addTags = async (params: AlbumAddTagsParams): Promise<string> => (
+    addTags(this.proxy, params)
+  );
 
   public getInfo = async (params: AlbumInfoParams): Promise<Album> => (
     getInfo(this.proxy, params)

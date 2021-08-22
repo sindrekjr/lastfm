@@ -14,6 +14,16 @@ export interface ApiProxyOptions {
   userAgent?: string;
 }
 
+// const signMethod = (method: Method, params: Params, key: string, secret: string): string => {
+//   const sorted = Object.entries(params)
+//     .filter(e => !['callback', 'format'].includes(e[0]))
+//     .sort((a, b) => a[0] < b[0] ? -1 : 1);
+
+//   const md5 = createHash('md5');
+//   md5.update(`api_key${key}${sorted.map(p => p.join('')).join('')}${secret}`);
+//   return md5.digest('hex');
+// };
+
 export class ApiProxy {
   private baseUrl: string = 'https://ws.audioscrobbler.com/2.0/';
   private apiKey: string;
@@ -41,28 +51,29 @@ export class ApiProxy {
     'User-Agent': this.userAgent,
   });
 
-  private getQueryParams = (method: string, params: Params): URLSearchParams => (
-    new URLSearchParams({
+  private getQueryParams = (method: Method, params: Params, sign = false): URLSearchParams => {
+    if (sign) {
+      if (!this.secret) throw new Error('Unable to sign without a secret.');
+
+      return new URLSearchParams({
+        ...params,
+        api_key: this.apiKey,
+        api_sig: this.signMethod(method, params),
+        format: this.format,
+        method,
+      });
+    }
+
+    return new URLSearchParams({
+      ...params,
       api_key: this.apiKey,
       format: this.format,
       method,
-      ...params,
-    })
-  );
-
-  public sendRequest = async (method: Method, params: Params): Promise<Response> => (
-    await fetch(`${this.baseUrl}?${this.getQueryParams(method, params).toString()}`, {
-      headers: this.getHeaders(),
-    })
-  );
-
-  public sendSignedRequest = async (method: Method, params: Params): Promise<Response> => {
-    if (!this.secret) throw new Error('Unable to sign without a secret.');
-    return this.sendRequest(method, { ...params, api_sig: this.sign({ ...params, method }) });
+    });
   };
 
-  private sign = (params: Params): string => {
-    const sorted = Object.entries(params)
+  private signMethod = (method: Method, params: Params): string => {
+    const sorted = Object.entries({ ...params, method })
       .filter(e => !['callback', 'format'].includes(e[0]))
       .sort((a, b) => a[0] < b[0] ? -1 : 1);
 
@@ -70,4 +81,23 @@ export class ApiProxy {
     md5.update(`api_key${this.apiKey}${sorted.map(p => p.join('')).join('')}${this.secret}`);
     return md5.digest('hex');
   };
+
+  public sendRequest = async (method: Method, params: Params, sign = false): Promise<Response> => (
+    await fetch(`${this.baseUrl}?${this.getQueryParams(method, params, sign).toString()}`, {
+      headers: this.getHeaders(),
+    })
+  );
+
+  public sendPostRequest = async (method: Method, params: Params): Promise<Response> => {
+    if (!this.sessionKey) throw new Error('Unable to authenticate and POST without a session key.');
+
+    return await fetch(this.baseUrl, {
+      method: 'POST',
+      body: this.getQueryParams(method, { ...params, sk: this.sessionKey }, true),
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': this.userAgent,
+      },
+    });
+  }
 }

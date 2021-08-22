@@ -5,7 +5,7 @@ export interface TokenResponseBody {
 }
 
 export const getToken = async (proxy: ApiProxy, params: Params = {}): Promise<string> => {
-  const response = await proxy.sendSignedRequest('auth.getToken', params);
+  const response = await proxy.sendRequest('auth.getToken', params, true);
   const { token } = await response.json();
   return token;
 };

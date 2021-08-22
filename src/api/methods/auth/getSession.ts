@@ -10,7 +10,7 @@ export interface AuthSessionResponseBody {
 }
 
 export const getSession = async (proxy: ApiProxy, params: AuthSessionParams): Promise<Session> => {
-  const response = await proxy.sendSignedRequest('auth.getSession', params);
+  const response = await proxy.sendRequest('auth.getSession', params, true);
   const { session } = await response.json() as AuthSessionResponseBody;
   return session;
 };
