@@ -7,12 +7,14 @@ export type Method = AlbumMethod | ArtistMethod | AuthMethod;
 
 export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
 
+export type BoolStr = '0' | '1';
+
 export interface AlbumShort {
   name: string;
   artist: string;
   mbid: string;
   url: string;
-  streamable?: string;
+  streamable?: BoolStr;
   image?: Image[];
 }
 
@@ -39,7 +41,7 @@ export interface Track {
   url: string;
   name: string;
   streamable: {
-    fulltrack: string;
-    '#text': string;
+    fulltrack: BoolStr;
+    '#text': BoolStr;
   }
 }

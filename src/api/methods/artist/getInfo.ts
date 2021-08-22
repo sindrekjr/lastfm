@@ -1,4 +1,4 @@
-import { ArtistShort, Image, MethodFunc, Tag } from '../common';
+import { ArtistShort, BoolStr, Image, MethodFunc, Tag } from '../common';
 import { ArtistParams } from './artist.service';
 
 export type ArtistInfoParams = ArtistParams & {
@@ -9,16 +9,26 @@ export type ArtistInfoParams = ArtistParams & {
 
 export interface Artist extends ArtistShort {
   image: Image[];
-  streamable: number;
+  streamable: BoolStr;
+  ontour: BoolStr;
   stats: {
-    listeners: number;
-    plays: number;
+    listeners: string;
+    plays: string;
   };
-  similar: ArtistShort[];
+  similar: {
+    artist: ArtistShort[];
+  };
   tags: {
     tag: Tag[];
   };
   bio: {
+    links: {
+      link: {
+        '#text': string;
+        rel: string;
+        href: string;
+      }
+    };
     published: string;
     summary: string;
     content: string;
