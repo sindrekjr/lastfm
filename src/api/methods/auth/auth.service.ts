@@ -1,5 +1,5 @@
 import { ApiProxy, Params } from '../../proxy';
-import { BaseService } from '../service.class.base';
+import { BaseService } from '../service.base';
 import { AuthSessionParams, getSession } from './getSession';
 import { getToken } from './getToken';
 

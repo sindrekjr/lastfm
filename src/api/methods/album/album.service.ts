@@ -1,6 +1,6 @@
 import { ApiProxy, Params } from '../../proxy';
 import { Album, AlbumShort, Tag } from '../common';
-import { BaseService } from '../service.class.base';
+import { BaseService } from '../service.base';
 
 import { AlbumInfoParams, getInfo } from './getInfo';
 import { AlbumTagsParams, getTags } from './getTags';
