@@ -1,4 +1,4 @@
-import { Album, MethodHandler } from '../common';
+import { Album, MethodFunc } from '../common';
 import { AlbumParams } from './album.service';
 
 export type AlbumInfoParams = AlbumParams & {
@@ -11,7 +11,7 @@ export interface AlbumInfoResponseBody {
   album: Album;
 }
 
-export const getInfo: MethodHandler<AlbumInfoParams, Album> = async (proxy, params) => {
+export const getInfo: MethodFunc<AlbumInfoParams, Album> = async (proxy, params) => {
   const response = await proxy.sendRequest('album.getInfo', params);
   const { album } = await response.json() as AlbumInfoResponseBody;
   return album;

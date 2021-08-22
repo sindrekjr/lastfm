@@ -1,5 +1,5 @@
 import { AlbumParams } from '.';
-import { MethodHandler, Tag } from '../common';
+import { MethodFunc, Tag } from '../common';
 
 export type AlbumTagsParams = AlbumParams & {
   autocorrect?: string;
@@ -17,7 +17,7 @@ export interface AlbumTagsResponseBody {
   };
 }
 
-export const getTags: MethodHandler<AlbumTagsParams, Tag[]> = async (proxy, params) => {
+export const getTags: MethodFunc<AlbumTagsParams, Tag[]> = async (proxy, params) => {
   const response = await proxy.sendRequest('album.getTags', params);
   const { tags: { tag } } = await response.json() as AlbumTagsResponseBody;
   return tag;

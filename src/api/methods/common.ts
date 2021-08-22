@@ -4,7 +4,7 @@ import { AuthMethod } from './auth';
 
 export type Method = AlbumMethod | AuthMethod;
 
-export type MethodHandler<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
+export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
 
 export interface Album {
   name: string;
