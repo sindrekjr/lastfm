@@ -1,11 +1,11 @@
 import { ApiProxy, Params } from '../../proxy';
 import { Method } from '../common';
-import { ChartService } from './chart.service';
+import { GeoService } from './geo.service';
 
-describe('ChartService', () => {
+describe('GeoService', () => {
   const apiKey = 'testApiKey';
   const proxy = new ApiProxy({ apiKey });
-  const service = new ChartService(proxy);
+  const service = new GeoService(proxy);
   const sendRequest = jest.spyOn(proxy, 'sendRequest');
 
   afterEach(() => jest.clearAllMocks());
@@ -29,17 +29,17 @@ describe('ChartService', () => {
 
 
   /**
-   * chart.getTopArtists
+   * geo.getTopArtists
    */
   describe('getTopArtists', () => {
     beforeAll(() => {
       global.fetch = jest.fn(() => Promise.resolve({
-        json: () => Promise.resolve({ artists: { artist: [] } }),
+        json: () => Promise.resolve({ topartists: { artist: [] } }),
       } as Response));
     });
 
     describe.each([
-      [{}],
+      [{ country: 'Germany' }],
     ])('success', getTopArtistsParams => {
       commonMethodSuccessTests('chart.getTopArtists', getTopArtistsParams, service.getTopArtists);
     });
@@ -47,25 +47,7 @@ describe('ChartService', () => {
 
 
   /**
-   * chart.getTopTags
-   */
-  describe('getTopTags', () => {
-    beforeAll(() => {
-      global.fetch = jest.fn(() => Promise.resolve({
-        json: () => Promise.resolve({ tags: { tag: [] } }),
-      } as Response));
-    });
-
-    describe.each([
-      [{}],
-    ])('success', getTopTagsParams => {
-      commonMethodSuccessTests('chart.getTopTags', getTopTagsParams, service.getTopTags);
-    });
-  });
-
-
-  /**
-   * chart.getTopTracks
+   * geo.getTopTracks
    */
   describe('getTopTracks', () => {
     beforeAll(() => {
@@ -75,7 +57,7 @@ describe('ChartService', () => {
     });
 
     describe.each([
-      [{}],
+      [{ country: 'Germany' }],
     ])('success', getTopTracksParams => {
       commonMethodSuccessTests('chart.getTopTracks', getTopTracksParams, service.getTopTracks);
     });
