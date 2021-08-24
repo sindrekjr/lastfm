@@ -1,4 +1,5 @@
 import { ApiProxy } from '../../proxy';
+import { Tag } from '../common';
 import { BaseService } from '../service.base';
 
 import { addTags, TrackAddTagsParams } from './addTags';
@@ -6,6 +7,7 @@ import { getCorrection, TrackCorrectionParams } from './getCorrection';
 import { getInfo, TrackInfoParams } from './getInfo';
 import { getSimilar, TrackSimilarParams } from './getSimilar';
 import { getTags, TrackTagsParams } from './getTags';
+import { removeTag, TrackRemoveTagParams } from './removeTag';
 
 export type TrackMethod =
   'track.addTags' |
@@ -42,7 +44,11 @@ export class TrackService extends BaseService {
     getSimilar(this.proxy, params)
   );
 
-  public getTags = (params: TrackTagsParams) => (
+  public getTags = (params: TrackTagsParams): Promise<Tag[]> => (
     getTags(this.proxy, params)
+  );
+
+  public removeTag = (params: TrackRemoveTagParams): Promise<boolean> => (
+    removeTag(this.proxy, params)
   );
 }
