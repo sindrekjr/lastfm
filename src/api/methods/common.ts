@@ -3,8 +3,9 @@ import { AlbumMethod } from './album';
 import { ArtistMethod } from './artist';
 import { AuthMethod } from './auth';
 import { ChartMethod } from './chart';
+import { GeoMethod } from './geo';
 
-export type Method = AlbumMethod | ArtistMethod | AuthMethod | ChartMethod;
+export type Method = AlbumMethod | ArtistMethod | AuthMethod | ChartMethod | GeoMethod;
 
 export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
 

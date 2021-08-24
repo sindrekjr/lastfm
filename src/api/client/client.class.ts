@@ -1,5 +1,10 @@
-import { AlbumService, AuthService, ChartService, Session } from '../methods';
-import { ArtistService } from '../methods/artist';
+import {
+  AlbumService,
+  ArtistService,
+  AuthService,
+  ChartService,
+  GeoService,
+} from '../methods';
 import { ApiProxy, ApiProxyOptions } from '../proxy';
 
 export interface ApiClientOptions extends ApiProxyOptions {
@@ -9,6 +14,7 @@ export interface ApiClientOptions extends ApiProxyOptions {
     artist?: ArtistService;
     auth?: AuthService;
     chart?: ChartService;
+    geo?: GeoService;
   };
 }
 
@@ -19,6 +25,7 @@ export class ApiClient {
   public artist: ArtistService;
   public auth: AuthService;
   public chart: ChartService;
+  public geo: GeoService;
 
   constructor(options: ApiClientOptions) {
     const { proxy, services } = options;
@@ -28,11 +35,6 @@ export class ApiClient {
     this.artist = services?.artist || new ArtistService(this.proxy);
     this.auth = services?.auth || new AuthService(this.proxy);
     this.chart = services?.chart || new ChartService(this.proxy);
-  }
-
-  public authenticate = async (): Promise<Session> => {
-    throw new Error('Not yet implemented');
-    // const token = await this.auth.getToken();
-    // return await this.auth.getSession({ token });
+    this.geo = services?.geo || new GeoService(this.proxy);
   }
 }
