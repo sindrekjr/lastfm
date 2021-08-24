@@ -6,7 +6,7 @@ export interface ChartTopArtistsParams extends Params {
   limit?: number;
 }
 
-interface TopArtist extends Artist {
+export interface TopArtist extends Artist {
   playcount: string;
   listeners: string;
   streamable: BoolStr;

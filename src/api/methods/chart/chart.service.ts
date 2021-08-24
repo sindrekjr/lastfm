@@ -1,8 +1,8 @@
 import { ApiProxy } from '../../proxy';
-import { Artist, TrackInfo } from '../common';
+import { TrackInfo } from '../common';
 import { BaseService } from '../service.base';
 
-import { ChartTopArtistsParams, getTopArtists } from './getTopArtists';
+import { ChartTopArtistsParams, getTopArtists, TopArtist } from './getTopArtists';
 import { ChartTopTagsParams, getTopTags, TopTag } from './getTopTags';
 import { ChartTopTracksParams, getTopTracks } from './getTopTracks';
 
@@ -16,7 +16,7 @@ export class ChartService extends BaseService {
     super(proxy);
   }
 
-  public getTopArtists = async (params: ChartTopArtistsParams = {}): Promise<Artist[]> => (
+  public getTopArtists = async (params: ChartTopArtistsParams = {}): Promise<TopArtist[]> => (
     getTopArtists(this.proxy, params)
   );
 
