@@ -21,11 +21,11 @@ export class AuthService extends BaseService {
     super(proxy);
   }
 
-  public getSession = async (params: AuthSessionParams): Promise<Session> => (
+  public getSession = (params: AuthSessionParams): Promise<Session> => (
     getSession(this.proxy, params)
   );
 
-  public getToken = async (params: AuthParams = {}): Promise<string> => (
+  public getToken = (params: AuthParams = {}): Promise<string> => (
     getToken(this.proxy, params)
   );
 }

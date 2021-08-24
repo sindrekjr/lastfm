@@ -30,43 +30,43 @@ export class ArtistService extends BaseService {
     super(proxy);
   }
 
-  public addTags = async (params: ArtistAddTagsParams): Promise<boolean> => (
+  public addTags = (params: ArtistAddTagsParams): Promise<boolean> => (
     addTags(this.proxy, params)
   );
 
-  public getCorrection = async (params: ArtistCorrectionParams): Promise<Artist> => (
+  public getCorrection = (params: ArtistCorrectionParams): Promise<Artist> => (
     getCorrection(this.proxy, params)
   );
 
-  public getInfo = async (params: ArtistInfoParams): Promise<ArtistInfo> => (
+  public getInfo = (params: ArtistInfoParams): Promise<ArtistInfo> => (
     getInfo(this.proxy, params)
   );
 
-  public getSimilar = async (params: ArtistSimilarParams): Promise<SimilarArtist[]> => (
+  public getSimilar = (params: ArtistSimilarParams): Promise<SimilarArtist[]> => (
     getSimilar(this.proxy, params)
   );
 
-  public getTags = async (params: ArtistTagsParams): Promise<Tag[]> => (
+  public getTags = (params: ArtistTagsParams): Promise<Tag[]> => (
     getTags(this.proxy, params)
   );
 
-  public getTopAlbums = async (params: ArtistTopAlbumsParams): Promise<Album[]> => (
+  public getTopAlbums = (params: ArtistTopAlbumsParams): Promise<Album[]> => (
     getTopAlbums(this.proxy, params)
   );
 
-  public getTopTags = async (params: ArtistTopTagsParams): Promise<Tag[]> => (
+  public getTopTags = (params: ArtistTopTagsParams): Promise<Tag[]> => (
     getTopTags(this.proxy, params)
   );
 
-  public getTopTracks = async (params: ArtistTopTracksParams): Promise<Track[]> => (
+  public getTopTracks = (params: ArtistTopTracksParams): Promise<Track[]> => (
     getTopTracks(this.proxy, params)
   );
 
-  public removeTag = async (params: ArtistRemoveTagParams): Promise<boolean> => (
+  public removeTag = (params: ArtistRemoveTagParams): Promise<boolean> => (
     removeTag(this.proxy, params)
   );
 
-  public search = async (params: ArtistSearchParams): Promise<ArtistSearchResult[]> => (
+  public search = (params: ArtistSearchParams): Promise<ArtistSearchResult[]> => (
     search(this.proxy, params)
   );
 }

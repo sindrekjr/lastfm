@@ -16,15 +16,15 @@ export class ChartService extends BaseService {
     super(proxy);
   }
 
-  public getTopArtists = async (params: ChartTopArtistsParams = {}): Promise<TopArtist[]> => (
+  public getTopArtists = (params: ChartTopArtistsParams = {}): Promise<TopArtist[]> => (
     getTopArtists(this.proxy, params)
   );
 
-  public getTopTags = async (params: ChartTopTagsParams = {}): Promise<TopTag[]> => (
+  public getTopTags = (params: ChartTopTagsParams = {}): Promise<TopTag[]> => (
     getTopTags(this.proxy, params)
   );
 
-  public getTopTracks = async (params: ChartTopTracksParams = {}): Promise<TrackInfo[]> => (
+  public getTopTracks = (params: ChartTopTracksParams = {}): Promise<TrackInfo[]> => (
     getTopTracks(this.proxy, params)
   );
 }

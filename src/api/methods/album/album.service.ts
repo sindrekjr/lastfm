@@ -22,27 +22,27 @@ export class AlbumService extends BaseService {
     super(proxy);
   }
 
-  public addTags = async (params: AlbumAddTagsParams): Promise<boolean> => (
+  public addTags = (params: AlbumAddTagsParams): Promise<boolean> => (
     addTags(this.proxy, params)
   );
 
-  public getInfo = async (params: AlbumInfoParams): Promise<AlbumInfo> => (
+  public getInfo = (params: AlbumInfoParams): Promise<AlbumInfo> => (
     getInfo(this.proxy, params)
   );
 
-  public getTags = async (params: AlbumTagsParams): Promise<Tag[]> => (
+  public getTags = (params: AlbumTagsParams): Promise<Tag[]> => (
     getTags(this.proxy, params)
   );
 
-  public getTopTags = async (params: AlbumTopTagsParams): Promise<Tag[]> => (
+  public getTopTags = (params: AlbumTopTagsParams): Promise<Tag[]> => (
     getTopTags(this.proxy, params)
   );
 
-  public removeTag = async (params: AlbumRemoveTagParams): Promise<boolean> => (
+  public removeTag = (params: AlbumRemoveTagParams): Promise<boolean> => (
     removeTag(this.proxy, params)
   );
 
-  public search = async (params: AlbumSearchParams): Promise<Album[]> => (
+  public search = (params: AlbumSearchParams): Promise<Album[]> => (
     search(this.proxy, params)
   );
 }
