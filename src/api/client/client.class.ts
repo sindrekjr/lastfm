@@ -4,6 +4,7 @@ import {
   AuthService,
   ChartService,
   GeoService,
+  LibraryService,
 } from '../methods';
 import { ApiProxy, ApiProxyOptions } from '../proxy';
 
@@ -15,6 +16,7 @@ export interface ApiClientOptions extends ApiProxyOptions {
     auth?: AuthService;
     chart?: ChartService;
     geo?: GeoService;
+    library?: LibraryService;
   };
 }
 
@@ -26,6 +28,7 @@ export class ApiClient {
   public auth: AuthService;
   public chart: ChartService;
   public geo: GeoService;
+  public library: LibraryService;
 
   constructor(options: ApiClientOptions) {
     const { proxy, services } = options;
@@ -36,5 +39,6 @@ export class ApiClient {
     this.auth = services?.auth || new AuthService(this.proxy);
     this.chart = services?.chart || new ChartService(this.proxy);
     this.geo = services?.geo || new GeoService(this.proxy);
+    this.library = services?.library || new LibraryService(this.proxy);
   }
 }

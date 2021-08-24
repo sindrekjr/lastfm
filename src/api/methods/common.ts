@@ -4,8 +4,15 @@ import { ArtistMethod } from './artist';
 import { AuthMethod } from './auth';
 import { ChartMethod } from './chart';
 import { GeoMethod } from './geo';
+import { LibraryMethod } from './library';
 
-export type Method = AlbumMethod | ArtistMethod | AuthMethod | ChartMethod | GeoMethod;
+export type Method =
+  AlbumMethod |
+  ArtistMethod |
+  AuthMethod |
+  ChartMethod |
+  GeoMethod |
+  LibraryMethod;
 
 export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
 
