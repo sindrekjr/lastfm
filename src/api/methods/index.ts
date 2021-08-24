@@ -4,4 +4,7 @@ export * from './auth';
 export * from './chart';
 export * from './geo';
 export * from './library';
+export * from './tag';
+export * from './track';
+export * from './user';
 export * from './common';
