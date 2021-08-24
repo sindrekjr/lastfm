@@ -5,6 +5,9 @@ import { AuthMethod } from './auth';
 import { ChartMethod } from './chart';
 import { GeoMethod } from './geo';
 import { LibraryMethod } from './library';
+import { TagMethod } from './tag';
+import { TrackMethod } from './track';
+import { UserMethod } from './user';
 
 export type Method =
   AlbumMethod |
@@ -12,7 +15,10 @@ export type Method =
   AuthMethod |
   ChartMethod |
   GeoMethod |
-  LibraryMethod;
+  LibraryMethod |
+  TagMethod |
+  TrackMethod |
+  UserMethod;
 
 export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
 
