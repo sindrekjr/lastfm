@@ -7,7 +7,13 @@ import { getCorrection, TrackCorrectionParams } from './getCorrection';
 import { getInfo, TrackInfoParams } from './getInfo';
 import { getSimilar, TrackSimilarParams } from './getSimilar';
 import { getTags, TrackTagsParams } from './getTags';
+import { getTopTags } from './getTopTags';
+import { love } from './love';
 import { removeTag, TrackRemoveTagParams } from './removeTag';
+import { scrobble } from './scrobble';
+import { search } from './search';
+import { unlove } from './unlove';
+import { updateNowPlaying } from './updateNowPlaying';
 
 export type TrackMethod =
   'track.addTags' |
@@ -48,7 +54,19 @@ export class TrackService extends BaseService {
     getTags(this.proxy, params)
   );
 
+  public getTopTags = (params: never) => getTopTags(this.proxy, params);
+
+  public love = (params: never) => love(this.proxy, params);
+
   public removeTag = (params: TrackRemoveTagParams): Promise<boolean> => (
     removeTag(this.proxy, params)
   );
+
+  public scrobble = (params: never) => scrobble(this.proxy, params);
+
+  public search = (params: never) => search(this.proxy, params);
+
+  public unlove = (params: never) => unlove(this.proxy, params);
+
+  public updateNowPlaying = (params: never) => updateNowPlaying(this.proxy, params);
 }
