@@ -41,7 +41,7 @@ describe('GeoService', () => {
     describe.each([
       [{ country: 'Germany' }],
     ])('success', getTopArtistsParams => {
-      commonMethodSuccessTests('chart.getTopArtists', getTopArtistsParams, service.getTopArtists);
+      commonMethodSuccessTests('geo.getTopArtists', getTopArtistsParams, service.getTopArtists);
     });
   });
 
@@ -59,7 +59,7 @@ describe('GeoService', () => {
     describe.each([
       [{ country: 'Germany' }],
     ])('success', getTopTracksParams => {
-      commonMethodSuccessTests('chart.getTopTracks', getTopTracksParams, service.getTopTracks);
+      commonMethodSuccessTests('geo.getTopTracks', getTopTracksParams, service.getTopTracks);
     });
   });
 });
