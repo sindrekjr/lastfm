@@ -47,7 +47,7 @@ export interface Image {
 export interface Tag {
   name: string;
   url: string;
-  count: number;
+  count?: number;
 }
 
 export interface Track {
