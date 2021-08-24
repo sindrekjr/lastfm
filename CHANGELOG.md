@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.0](https://github.com/sindrekjr/lastfm/tree/v0.5.0)
+
+#### 2021-08-24
+- 🎉 Added `GeoService` with methods `getTopArtists` `getTopTracks`.
+- 🎉 Added `LibraryService` with method `getArtists`.
+
 ## [v0.4.0](https://github.com/sindrekjr/lastfm/tree/v0.4.0)
 
 #### 2021-08-23
