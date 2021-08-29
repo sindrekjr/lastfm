@@ -7,7 +7,7 @@ import { getCorrection, TrackCorrection, TrackCorrectionParams } from './getCorr
 import { getInfo, TrackInfo, TrackInfoParams } from './getInfo';
 import { getSimilar, SimilarTrack, TrackSimilarParams } from './getSimilar';
 import { getTags, TrackTagsParams } from './getTags';
-import { getTopTags } from './getTopTags';
+import { getTopTags, TrackTopTagsParams } from './getTopTags';
 import { love } from './love';
 import { removeTag, TrackRemoveTagParams } from './removeTag';
 import { scrobble } from './scrobble';
@@ -54,7 +54,9 @@ export class TrackService extends BaseService {
     getTags(this.proxy, params)
   );
 
-  public getTopTags = (params: never) => getTopTags(this.proxy, params);
+  public getTopTags = (params: TrackTopTagsParams): Promise<Tag[]> => (
+    getTopTags(this.proxy, params)
+  );
 
   public love = (params: never) => love(this.proxy, params);
 
