@@ -12,7 +12,7 @@ import { love, TrackLoveParams } from './love';
 import { removeTag, TrackRemoveTagParams } from './removeTag';
 import { scrobble } from './scrobble';
 import { search } from './search';
-import { unlove } from './unlove';
+import { TrackUnloveParams, unlove } from './unlove';
 import { updateNowPlaying } from './updateNowPlaying';
 
 export type TrackMethod =
@@ -70,7 +70,9 @@ export class TrackService extends BaseService {
 
   public search = (params: never) => search(this.proxy, params);
 
-  public unlove = (params: never) => unlove(this.proxy, params);
+  public unlove = (params: TrackUnloveParams): Promise<boolean> => (
+    unlove(this.proxy, params)
+  );
 
   public updateNowPlaying = (params: never) => updateNowPlaying(this.proxy, params);
 }
