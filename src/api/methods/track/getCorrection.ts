@@ -1,12 +1,38 @@
 import { Params } from '../../proxy';
-import { MethodFunc, Track } from '../common';
+import { Artist, MethodFunc } from '../common';
 
 export interface TrackCorrectionParams extends Params {
   artist: string;
   track: string;
 }
 
-export const getCorrection: MethodFunc<TrackCorrectionParams, Track> = async (proxy, params) => {
+export interface TrackCorrection {
+  name: string;
+  url: string;
+  artist: Artist;
+}
+
+interface TrackCorrectionResponseBody {
+  corrections: {
+    correction: {
+      track: TrackCorrection;
+      '@attr': {
+        index: string;
+        artistcorrected: string;
+        trackcorrected: string;
+      };
+    };
+  };
+}
+
+export const getCorrection: MethodFunc<TrackCorrectionParams, TrackCorrection> = async (
+  proxy,
+  params,
+) => {
   const response = await proxy.sendRequest('track.getCorrection', params);
-  return await response.json();
+  const {
+    corrections: { correction: { track } },
+  } = await response.json() as TrackCorrectionResponseBody;
+
+  return track;
 };

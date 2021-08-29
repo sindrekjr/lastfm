@@ -3,7 +3,7 @@ import { Tag } from '../common';
 import { BaseService } from '../service.base';
 
 import { addTags, TrackAddTagsParams } from './addTags';
-import { getCorrection, TrackCorrectionParams } from './getCorrection';
+import { getCorrection, TrackCorrection, TrackCorrectionParams } from './getCorrection';
 import { getInfo, TrackInfoParams } from './getInfo';
 import { getSimilar, TrackSimilarParams } from './getSimilar';
 import { getTags, TrackTagsParams } from './getTags';
@@ -38,7 +38,7 @@ export class TrackService extends BaseService {
     addTags(this.proxy, params)
   );
 
-  public getCorrection = (params: TrackCorrectionParams) => (
+  public getCorrection = (params: TrackCorrectionParams): Promise<TrackCorrection> => (
     getCorrection(this.proxy, params)
   );
 
