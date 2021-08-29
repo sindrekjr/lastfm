@@ -5,7 +5,7 @@ import { BaseService } from '../service.base';
 import { addTags, TrackAddTagsParams } from './addTags';
 import { getCorrection, TrackCorrection, TrackCorrectionParams } from './getCorrection';
 import { getInfo, TrackInfo, TrackInfoParams } from './getInfo';
-import { getSimilar, TrackSimilarParams } from './getSimilar';
+import { getSimilar, SimilarTrack, TrackSimilarParams } from './getSimilar';
 import { getTags, TrackTagsParams } from './getTags';
 import { getTopTags } from './getTopTags';
 import { love } from './love';
@@ -46,7 +46,7 @@ export class TrackService extends BaseService {
     getInfo(this.proxy, params)
   );
 
-  public getSimilar = (params: TrackSimilarParams) => (
+  public getSimilar = (params: TrackSimilarParams): Promise<SimilarTrack[]> => (
     getSimilar(this.proxy, params)
   );
 

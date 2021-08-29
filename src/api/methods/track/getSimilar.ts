@@ -1,5 +1,5 @@
 import { Params } from '../../proxy';
-import { BoolStr, MethodFunc, Track } from '../common';
+import { BoolStr, Image, MethodFunc, Track } from '../common';
 
 export type TrackSimilarParams = Params & (
   { mbid: string; } | {
@@ -11,7 +11,27 @@ export type TrackSimilarParams = Params & (
   limit?: number;
 };
 
-export const getSimilar: MethodFunc<TrackSimilarParams, Track[]> = async (proxy, params) => {
+export interface SimilarTrack extends Track {
+  playcount: number;
+  match: number;
+  image: Image[];
+  streamable: {
+    fulltrack: BoolStr;
+    '#text': BoolStr;
+  };
+}
+
+interface TrackSimilarResponsebody {
+  similartracks: {
+    track: SimilarTrack[];
+    '@attr': {
+      artist: string;
+    };
+  };
+}
+
+export const getSimilar: MethodFunc<TrackSimilarParams, SimilarTrack[]> = async (proxy, params) => {
   const response = await proxy.sendRequest('track.getSimilar', params);
-  return await response.json();
+  const { similartracks: { track } } = await response.json() as TrackSimilarResponsebody;
+  return track;
 };
