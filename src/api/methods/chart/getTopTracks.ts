@@ -1,5 +1,5 @@
 import { Params } from '../../proxy';
-import { MethodFunc, TrackInfo } from '../common';
+import { MethodFunc, TrackExtended } from '../common';
 
 export interface ChartTopTracksParams extends Params {
   page?: number;
@@ -8,7 +8,7 @@ export interface ChartTopTracksParams extends Params {
 
 interface ChartTopTracksResponseBody {
   tracks: {
-    track: TrackInfo[];
+    track: TrackExtended[];
     '@attr': {
       page: string;
       perPage: string;
@@ -18,7 +18,7 @@ interface ChartTopTracksResponseBody {
   };
 }
 
-export const getTopTracks: MethodFunc<ChartTopTracksParams, TrackInfo[]> = async (
+export const getTopTracks: MethodFunc<ChartTopTracksParams, TrackExtended[]> = async (
   proxy,
   params,
 ) => {

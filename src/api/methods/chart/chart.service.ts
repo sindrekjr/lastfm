@@ -1,5 +1,5 @@
 import { ApiProxy } from '../../proxy';
-import { TrackInfo } from '../common';
+import { TrackExtended } from '../common';
 import { BaseService } from '../service.base';
 
 import { ChartTopArtistsParams, getTopArtists, TopArtist } from './getTopArtists';
@@ -24,7 +24,7 @@ export class ChartService extends BaseService {
     getTopTags(this.proxy, params)
   );
 
-  public getTopTracks = (params: ChartTopTracksParams = {}): Promise<TrackInfo[]> => (
+  public getTopTracks = (params: ChartTopTracksParams = {}): Promise<TrackExtended[]> => (
     getTopTracks(this.proxy, params)
   );
 }

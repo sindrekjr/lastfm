@@ -1,5 +1,5 @@
 import { Params } from '../../proxy';
-import { Album, MethodFunc, Tag, TrackInfo } from '../common';
+import { Album, MethodFunc, Tag, TrackExtended } from '../common';
 
 export type AlbumInfoParams = Params & (
   {
@@ -21,7 +21,7 @@ export interface AlbumInfo extends Album {
   releasedate?: string;
   toptags?: Tag[];
   tracks?: {
-    track: TrackInfo[];
+    track: TrackExtended[];
   };
   tags?: {
     tag: Tag[];

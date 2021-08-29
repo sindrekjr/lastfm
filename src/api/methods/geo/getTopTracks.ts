@@ -1,5 +1,5 @@
 import { Params } from '../../proxy';
-import { MethodFunc, TrackInfo } from '../common';
+import { MethodFunc, TrackExtended } from '../common';
 
 export interface GeoTopTracksParams extends Params {
   country: string;
@@ -10,7 +10,7 @@ export interface GeoTopTracksParams extends Params {
 
 interface GeoTopTracksResponseBody {
   tracks: {
-    track: TrackInfo[];
+    track: TrackExtended[];
     '@attr': {
       country: string;
       page: string;
@@ -21,7 +21,10 @@ interface GeoTopTracksResponseBody {
   };
 }
 
-export const getTopTracks: MethodFunc<GeoTopTracksParams, TrackInfo[]> = async (proxy, params) => {
+export const getTopTracks: MethodFunc<GeoTopTracksParams, TrackExtended[]> = async (
+  proxy,
+  params,
+) => {
   const response = await proxy.sendRequest('geo.getTopTracks', params);
   const { tracks: { track } } = await response.json() as GeoTopTracksResponseBody;
   return track;

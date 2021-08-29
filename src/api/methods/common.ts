@@ -51,20 +51,20 @@ export interface Tag {
 }
 
 export interface Track {
-  artist: Artist;
-  duration?: number;
-  url: string;
   name: string;
+  url: string;
+  duration?: number;
   streamable: BoolStr | {
     fulltrack: BoolStr;
     '#text': BoolStr;
-  }
+  };
+  artist: Artist;
 }
 
-export interface TrackInfo extends Track {
-  playcount: string;
-  listeners: string;
+export interface TrackExtended extends Track {
   mbid: string;
+  listeners: string;
+  playcount: string;
   streamable: BoolStr;
   image: Image[];
 }

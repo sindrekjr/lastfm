@@ -1,5 +1,5 @@
 import { ApiProxy } from '../../proxy';
-import { Artist, TrackInfo } from '../common';
+import { Artist, TrackExtended } from '../common';
 import { BaseService } from '../service.base';
 import { GeoTopArtistsParams, getTopArtists } from './getTopArtists';
 import { GeoTopTracksParams, getTopTracks } from './getTopTracks';
@@ -15,7 +15,7 @@ export class GeoService extends BaseService {
     getTopArtists(this.proxy, params)
   );
 
-  public getTopTracks = (params: GeoTopTracksParams): Promise<TrackInfo[]> => (
+  public getTopTracks = (params: GeoTopTracksParams): Promise<TrackExtended[]> => (
     getTopTracks(this.proxy, params)
   );
 }
