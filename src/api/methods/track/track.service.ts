@@ -10,7 +10,7 @@ import { getTags, TrackTagsParams } from './getTags';
 import { getTopTags, TrackTopTagsParams } from './getTopTags';
 import { love, TrackLoveParams } from './love';
 import { removeTag, TrackRemoveTagParams } from './removeTag';
-import { scrobble } from './scrobble';
+import { scrobble, TrackScrobbleParams } from './scrobble';
 import { search } from './search';
 import { TrackUnloveParams, unlove } from './unlove';
 import { updateNowPlaying } from './updateNowPlaying';
@@ -66,7 +66,9 @@ export class TrackService extends BaseService {
     removeTag(this.proxy, params)
   );
 
-  public scrobble = (params: never) => scrobble(this.proxy, params);
+  public scrobble = (params: TrackScrobbleParams) => (
+    scrobble(this.proxy, params)
+  );
 
   public search = (params: never) => search(this.proxy, params);
 
