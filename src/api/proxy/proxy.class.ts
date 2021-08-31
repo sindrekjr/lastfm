@@ -2,7 +2,9 @@ import { createHash } from 'crypto';
 
 import { Method } from '../methods';
 
-export type Params = Record<string, Date | number | string | [] | undefined>;
+export type ParamValue = Date | number | string | undefined;
+
+export type Params = Record<string, ParamValue | ParamValue[]>;
 
 export interface ApiProxyOptions {
   apiKey: string;
