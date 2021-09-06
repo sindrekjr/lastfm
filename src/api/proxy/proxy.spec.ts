@@ -24,8 +24,8 @@ describe('ApiProxy', () => {
         + '?album=Jagged+Little+Pill'
         + '&artist=Alanis+Morissette'
         + '&api_key=testApiKey'
-        + '&format=json'
-        + '&method=album.getInfo',
+        + '&method=album.getInfo'
+        + '&format=json',
         {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
