@@ -1,5 +1,5 @@
 import { ApiProxy, Params } from '../../proxy';
-import { Album, Tag, Track } from '../common';
+import { Album, Tag } from '../common';
 import { BaseService } from '../service.base';
 
 import { getInfo, TagInfo, TagInfoParams } from './getInfo';
