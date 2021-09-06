@@ -4,7 +4,7 @@ import { Method } from '../methods';
 
 export type ParamValue = Date | number | string | undefined;
 
-export type Params = Record<string, ParamValue | ParamValue[]>;
+export type Params<V = ParamValue | ParamValue[]> = Record<string, V>;
 
 export interface ApiProxyOptions {
   apiKey: string;

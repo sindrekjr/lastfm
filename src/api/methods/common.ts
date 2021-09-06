@@ -20,7 +20,7 @@ export type Method =
   TrackMethod |
   UserMethod;
 
-export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, params: P) => Promise<R>;
+export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, ...params: P[]) => Promise<R>;
 
 export type BoolStr = '0' | '1';
 
