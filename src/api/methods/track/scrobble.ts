@@ -1,7 +1,7 @@
-import { Params, ParamValue } from '../../proxy';
+import { Params } from '../../proxy';
 import { BoolStr, MethodFunc } from '../common';
 
-export interface TrackScrobbleParams extends Params<ParamValue> {
+export interface TrackScrobbleParams extends Params {
   artist: string;
   track: string;
   timestamp: Date | number;
@@ -13,20 +13,6 @@ export interface TrackScrobbleParams extends Params<ParamValue> {
   mbid?: string;
   albumArtist?: string;
   duration?: number;
-}
-
-export interface TrackScrobbleManyParams extends Params<ParamValue[]> {
-  artist: string[];
-  track: string[];
-  timestamp: number[];
-  album: string[];
-  context: string[];
-  streamId: string[];
-  chosenByUser: BoolStr[];
-  trackNumber: number[];
-  mbid: string[];
-  albumArtist: string[];
-  duration: number[];
 }
 
 export interface Scrobble {
