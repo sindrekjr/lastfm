@@ -13,7 +13,7 @@ import { removeTag, TrackRemoveTagParams } from './removeTag';
 import { Scrobble, scrobble, TrackScrobbleParams } from './scrobble';
 import { search, TrackSearchParams, TrackSearchResult } from './search';
 import { TrackUnloveParams, unlove } from './unlove';
-import { updateNowPlaying } from './updateNowPlaying';
+import { updateNowPlaying, UpdateNowPlayingParams } from './updateNowPlaying';
 
 export type TrackMethod =
   'track.addTags' |
@@ -78,5 +78,7 @@ export class TrackService extends BaseService {
     unlove(this.proxy, params)
   );
 
-  public updateNowPlaying = (params: never) => updateNowPlaying(this.proxy, params);
+  public updateNowPlaying = (params: UpdateNowPlayingParams) => (
+    updateNowPlaying(this.proxy, params)
+  );
 }

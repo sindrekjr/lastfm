@@ -1,5 +1,6 @@
 import { Params } from '../../proxy';
 import { BoolStr, MethodFunc } from '../common';
+import { NowPlaying } from './updateNowPlaying';
 
 export interface TrackScrobbleParams extends Params {
   artist: string;
@@ -15,28 +16,8 @@ export interface TrackScrobbleParams extends Params {
   duration?: number;
 }
 
-export interface Scrobble {
-  artist: {
-    correct: BoolStr;
-    '#text': string;
-  };
-  ignoredMessage?: {
-    code: string;
-    '#text'?: string;
-  };
-  albumArtist: {
-    correct: BoolStr;
-    '#text'?: string;
-  };
+export interface Scrobble extends NowPlaying {
   timestamp: string;
-  album: {
-    correct: BoolStr;
-    '#text'?: string;
-  };
-  track: {
-    correct: BoolStr;
-    '#text': string;
-  };
 }
 
 interface TrackScrobbleResponseBody {

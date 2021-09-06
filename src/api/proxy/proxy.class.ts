@@ -42,20 +42,22 @@ export class ApiProxy {
   });
 
   private getQueryParams = (method: Method, params: Params, sign = false): URLSearchParams => {
+    const { apiKey: api_key, format } = this;
+
     if (sign) {
       return new URLSearchParams({
         ...params,
         method,
-        api_key: this.apiKey,
+        api_key,
         api_sig: this.signMethod(method, params),
-        format: this.format,
+        format,
       });
     }
 
     return new URLSearchParams({
       ...params,
-      api_key: this.apiKey,
-      format: this.format,
+      api_key,
+      format,
       method,
     });
   };
