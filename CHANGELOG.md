@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.6.0](https://github.com/sindrekjr/lastfm/tree/v0.6.0)
+
+#### 2021-09-06
+- 💥 Renamed type `TrackInfo` to `TrackExtended`.
+- 🎉 Added `TagService` and completed all methods.
+- 🎉 Added `TrackService` and completed all methods.
+- 🔧 Scaffolded `UserService` with no methods.
+- 🔧 Cleanup typings and method signatures.
+
 ## [v0.5.0](https://github.com/sindrekjr/lastfm/tree/v0.5.0)
 
 #### 2021-08-24
