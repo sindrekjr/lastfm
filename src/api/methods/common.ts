@@ -57,7 +57,7 @@ export interface Tag {
 export interface Track {
   name: string;
   url: string;
-  duration?: number;
+  duration?: number | string;
   streamable: BoolStr | {
     fulltrack: BoolStr;
     '#text': BoolStr;
