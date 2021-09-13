@@ -1,5 +1,5 @@
-import { ApiProxy, Params } from '../../proxy';
-import { Method } from '../common';
+import { ApiProxy } from '../../proxy';
+import { commonMethodSuccessTests } from '../.jest';
 import { ArtistService } from './artist.service';
 
 describe('ArtistService', () => {
@@ -9,23 +9,6 @@ describe('ArtistService', () => {
   const sendRequest = jest.spyOn(proxy, 'sendRequest');
 
   afterEach(() => jest.clearAllMocks());
-
-  const commonMethodSuccessTests = <P extends Params>(
-    method: Method,
-    params: P,
-    call: (params: P) => void,
-  ) => {
-    beforeEach(() => call(params));
-
-    it('should call fetch', () => {
-      expect(fetch).toHaveBeenCalledTimes(1);
-    });
-
-    it('should call proxy with expected parms', () => {
-      expect(sendRequest).toHaveBeenCalledWith(method, params);
-      expect(sendRequest).toHaveBeenCalledTimes(1);
-    });
-  };
 
 
   /**
@@ -43,7 +26,12 @@ describe('ArtistService', () => {
     describe.each([
       [{ artist: 'The Beatles' }],
     ])('success', getCorrectionParams => {
-      commonMethodSuccessTests('artist.getCorrection', getCorrectionParams, service.getCorrection);
+      commonMethodSuccessTests(
+        'artist.getCorrection',
+        getCorrectionParams,
+        service.getCorrection,
+        sendRequest,
+      );
     });
   });
 
@@ -63,7 +51,7 @@ describe('ArtistService', () => {
     describe.each([
       [{ artist: 'The Beatles' }],
     ])('success', getInfoParams => {
-      commonMethodSuccessTests('artist.getInfo', getInfoParams, service.getInfo);
+      commonMethodSuccessTests('artist.getInfo', getInfoParams, service.getInfo, sendRequest);
     });
   });
 
@@ -83,7 +71,12 @@ describe('ArtistService', () => {
     describe.each([
       [{ artist: 'The Beatles' }],
     ])('success', getSimilarParams => {
-      commonMethodSuccessTests('artist.getSimilar', getSimilarParams, service.getSimilar);
+      commonMethodSuccessTests(
+        'artist.getSimilar',
+        getSimilarParams,
+        service.getSimilar,
+        sendRequest,
+      );
     });
   });
 
@@ -101,7 +94,7 @@ describe('ArtistService', () => {
     describe.each([
       [{ artist: 'The Beatles', user: 'NotAnActualUser' }],
     ])('success', getTagsParams => {
-      commonMethodSuccessTests('artist.getTags', getTagsParams, service.getTags);
+      commonMethodSuccessTests('artist.getTags', getTagsParams, service.getTags, sendRequest);
     });
   });
 
@@ -119,7 +112,12 @@ describe('ArtistService', () => {
     describe.each([
       [{ artist: 'The Beatles' }],
     ])('success', getTopTagsParams => {
-      commonMethodSuccessTests('artist.getTopTags', getTopTagsParams, service.getTopTags);
+      commonMethodSuccessTests(
+        'artist.getTopTags',
+        getTopTagsParams,
+        service.getTopTags,
+        sendRequest,
+      );
     });
   });
 
@@ -137,7 +135,12 @@ describe('ArtistService', () => {
     describe.each([
       [{ artist: 'The Beatles' }],
     ])('success', getTopTracksParams => {
-      commonMethodSuccessTests('artist.getTopTracks', getTopTracksParams, service.getTopTracks);
+      commonMethodSuccessTests(
+        'artist.getTopTracks',
+        getTopTracksParams,
+        service.getTopTracks,
+        sendRequest,
+      );
     });
   });
 
@@ -157,7 +160,7 @@ describe('ArtistService', () => {
     describe.each([
       [{ artist: 'The Beatles' }],
     ])('success', searchParams => {
-      commonMethodSuccessTests('artist.search', searchParams, service.search);
+      commonMethodSuccessTests('artist.search', searchParams, service.search, sendRequest);
     });
   });
 });

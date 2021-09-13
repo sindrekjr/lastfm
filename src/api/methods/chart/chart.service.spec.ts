@@ -1,5 +1,5 @@
-import { ApiProxy, Params } from '../../proxy';
-import { Method } from '../common';
+import { ApiProxy } from '../../proxy';
+import { commonMethodSuccessTests } from '../.jest';
 import { ChartService } from './chart.service';
 
 describe('ChartService', () => {
@@ -9,23 +9,6 @@ describe('ChartService', () => {
   const sendRequest = jest.spyOn(proxy, 'sendRequest');
 
   afterEach(() => jest.clearAllMocks());
-
-  const commonMethodSuccessTests = <P extends Params>(
-    method: Method,
-    params: P,
-    call: (params: P) => void,
-  ) => {
-    beforeEach(() => call(params));
-
-    it('should call fetch', () => {
-      expect(fetch).toHaveBeenCalledTimes(1);
-    });
-
-    it('should call proxy with expected parms', () => {
-      expect(sendRequest).toHaveBeenCalledWith(method, params);
-      expect(sendRequest).toHaveBeenCalledTimes(1);
-    });
-  };
 
 
   /**
@@ -41,7 +24,12 @@ describe('ChartService', () => {
     describe.each([
       [{}],
     ])('success', getTopArtistsParams => {
-      commonMethodSuccessTests('chart.getTopArtists', getTopArtistsParams, service.getTopArtists);
+      commonMethodSuccessTests(
+        'chart.getTopArtists',
+        getTopArtistsParams,
+        service.getTopArtists,
+        sendRequest,
+      );
     });
   });
 
@@ -59,7 +47,12 @@ describe('ChartService', () => {
     describe.each([
       [{}],
     ])('success', getTopTagsParams => {
-      commonMethodSuccessTests('chart.getTopTags', getTopTagsParams, service.getTopTags);
+      commonMethodSuccessTests(
+        'chart.getTopTags',
+        getTopTagsParams,
+        service.getTopTags,
+        sendRequest,
+      );
     });
   });
 
@@ -77,7 +70,12 @@ describe('ChartService', () => {
     describe.each([
       [{}],
     ])('success', getTopTracksParams => {
-      commonMethodSuccessTests('chart.getTopTracks', getTopTracksParams, service.getTopTracks);
+      commonMethodSuccessTests(
+        'chart.getTopTracks',
+        getTopTracksParams,
+        service.getTopTracks,
+        sendRequest,
+      );
     });
   });
 });

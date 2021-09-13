@@ -1,5 +1,5 @@
-import { ApiProxy, Params } from '../../proxy';
-import { Method } from '../common';
+import { ApiProxy } from '../../proxy';
+import { commonMethodSuccessTests } from '../.jest';
 import { GeoService } from './geo.service';
 
 describe('GeoService', () => {
@@ -9,23 +9,6 @@ describe('GeoService', () => {
   const sendRequest = jest.spyOn(proxy, 'sendRequest');
 
   afterEach(() => jest.clearAllMocks());
-
-  const commonMethodSuccessTests = <P extends Params>(
-    method: Method,
-    params: P,
-    call: (params: P) => void,
-  ) => {
-    beforeEach(() => call(params));
-
-    it('should call fetch', () => {
-      expect(fetch).toHaveBeenCalledTimes(1);
-    });
-
-    it('should call proxy with expected parms', () => {
-      expect(sendRequest).toHaveBeenCalledWith(method, params);
-      expect(sendRequest).toHaveBeenCalledTimes(1);
-    });
-  };
 
 
   /**
@@ -41,7 +24,12 @@ describe('GeoService', () => {
     describe.each([
       [{ country: 'Germany' }],
     ])('success', getTopArtistsParams => {
-      commonMethodSuccessTests('geo.getTopArtists', getTopArtistsParams, service.getTopArtists);
+      commonMethodSuccessTests(
+        'geo.getTopArtists',
+        getTopArtistsParams,
+        service.getTopArtists,
+        sendRequest,
+      );
     });
   });
 
@@ -59,7 +47,12 @@ describe('GeoService', () => {
     describe.each([
       [{ country: 'Germany' }],
     ])('success', getTopTracksParams => {
-      commonMethodSuccessTests('geo.getTopTracks', getTopTracksParams, service.getTopTracks);
+      commonMethodSuccessTests(
+        'geo.getTopTracks',
+        getTopTracksParams,
+        service.getTopTracks,
+        sendRequest,
+      );
     });
   });
 });

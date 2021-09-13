@@ -1,5 +1,5 @@
-import { ApiProxy, Params } from '../../proxy';
-import { Method } from '../common';
+import { ApiProxy } from '../../proxy';
+import { commonMethodSuccessTests } from '../.jest';
 import { LibraryService } from './library.service';
 
 describe('LibraryService', () => {
@@ -9,24 +9,6 @@ describe('LibraryService', () => {
   const sendRequest = jest.spyOn(proxy, 'sendRequest');
 
   afterEach(() => jest.clearAllMocks());
-
-  const commonMethodSuccessTests = <P extends Params>(
-    method: Method,
-    params: P,
-    call: (params: P) => void,
-  ) => {
-    beforeEach(() => call(params));
-
-    it('should call fetch', () => {
-      expect(fetch).toHaveBeenCalledTimes(1);
-    });
-
-    it('should call proxy with expected parms', () => {
-      expect(sendRequest).toHaveBeenCalledWith(method, params);
-      expect(sendRequest).toHaveBeenCalledTimes(1);
-    });
-  };
-
 
   /**
    * library.getArtists
@@ -41,7 +23,12 @@ describe('LibraryService', () => {
     describe.each([
       [{ user: 'NotAnActualUser' }],
     ])('success', getArtistsParams => {
-      commonMethodSuccessTests('library.getArtists', getArtistsParams, service.getArtists);
+      commonMethodSuccessTests(
+        'library.getArtists',
+        getArtistsParams,
+        service.getArtists,
+        sendRequest,
+      );
     });
   });
 });

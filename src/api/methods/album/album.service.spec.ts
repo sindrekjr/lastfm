@@ -1,5 +1,5 @@
-import { ApiProxy, Params } from '../../proxy';
-import { Method } from '../common';
+import { ApiProxy } from '../../proxy';
+import { commonMethodSuccessTests } from '../.jest';
 import { AlbumService } from './album.service';
 
 describe('AlbumService', () => {
@@ -9,23 +9,6 @@ describe('AlbumService', () => {
   const sendRequest = jest.spyOn(proxy, 'sendRequest');
 
   afterEach(() => jest.clearAllMocks());
-
-  const commonMethodSuccessTests = <P extends Params>(
-    method: Method,
-    params: P,
-    call: (params: P) => void,
-  ) => {
-    beforeEach(() => call(params));
-
-    it('should call fetch', () => {
-      expect(fetch).toHaveBeenCalledTimes(1);
-    });
-
-    it('should call proxy with expected parms', () => {
-      expect(sendRequest).toHaveBeenCalledWith(method, params);
-      expect(sendRequest).toHaveBeenCalledTimes(1);
-    });
-  };
 
 
   /**
@@ -41,7 +24,7 @@ describe('AlbumService', () => {
     describe.each([
       [{ album: 'Believe', artist: 'Cher' }],
     ])('success', getInfoParams => {
-      commonMethodSuccessTests('album.getInfo', getInfoParams, service.getInfo);
+      commonMethodSuccessTests('album.getInfo', getInfoParams, service.getInfo, sendRequest);
     });
   });
 
@@ -59,7 +42,7 @@ describe('AlbumService', () => {
     describe.each([
       [{ album: 'Believe', artist: 'Cher', user: 'NotAnActualUser' }],
     ])('success', getTagsParams => {
-      commonMethodSuccessTests('album.getTags', getTagsParams, service.getTags);
+      commonMethodSuccessTests('album.getTags', getTagsParams, service.getTags, sendRequest);
     });
   });
 
@@ -77,7 +60,12 @@ describe('AlbumService', () => {
     describe.each([
       [{ album: 'The Bends', artist: 'Radioherad' }],
     ])('success', getTopTagsParams => {
-      commonMethodSuccessTests('album.getTopTags', getTopTagsParams, service.getTopTags);
+      commonMethodSuccessTests(
+        'album.getTopTags',
+        getTopTagsParams,
+        service.getTopTags,
+        sendRequest,
+      );
     });
   });
 
@@ -95,7 +83,7 @@ describe('AlbumService', () => {
     describe.each([
       [{ album: 'Hocus Pocus' }],
     ])('success', searchParams => {
-      commonMethodSuccessTests('album.search', searchParams, service.search);
+      commonMethodSuccessTests('album.search', searchParams, service.search, sendRequest);
     });
   });
 });
