@@ -1,13 +1,13 @@
-import { ApiProxy, Params } from '../proxy';
-import { AlbumMethod } from './album';
-import { ArtistMethod } from './artist';
-import { AuthMethod } from './auth';
-import { ChartMethod } from './chart';
-import { GeoMethod } from './geo';
-import { LibraryMethod } from './library';
-import { TagMethod } from './tag';
-import { TrackMethod } from './track';
-import { UserMethod } from './user';
+import { ApiProxy, Params } from '../../proxy';
+import { AlbumMethod } from '../album';
+import { ArtistMethod } from '../artist';
+import { AuthMethod } from '../auth';
+import { ChartMethod } from '../chart';
+import { GeoMethod } from '../geo';
+import { LibraryMethod } from '../library';
+import { TagMethod } from '../tag';
+import { TrackMethod } from '../track';
+import { UserMethod } from '../user';
 
 export type Method =
   AlbumMethod |
