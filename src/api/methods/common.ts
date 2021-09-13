@@ -24,6 +24,8 @@ export type MethodFunc<P extends Params, R> = (proxy: ApiProxy, ...params: P[]) 
 
 export type BoolStr = '0' | '1';
 
+export type TagType = 'artist' | 'album' | 'track';
+
 export type TimePeriod = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
 
 export interface Album {
