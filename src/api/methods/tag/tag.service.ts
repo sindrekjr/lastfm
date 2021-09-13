@@ -1,5 +1,5 @@
 import { ApiProxy, Params } from '../../proxy';
-import { Album, Tag } from '../common';
+import { Album, Chart, Tag } from '../common';
 import { BaseService } from '../service.base';
 
 import { getInfo, TagInfo, TagInfoParams } from './getInfo';
@@ -8,7 +8,7 @@ import { getTopAlbums, TagTopAlbumsParams } from './getTopAlbums';
 import { getTopArtists, RankedArtist, TagTopArtistsParams } from './getTopArtists';
 import { getTopTags, TopTag } from './getTopTags';
 import { getTopTracks, RankedTrack, TagTopTracksParams } from './getTopTracks';
-import { Chart, getWeeklyChartList, TagWeeklyChartListParams } from './getWeeklyChartList';
+import { getWeeklyChartList, TagWeeklyChartListParams } from './getWeeklyChartList';
 
 export type TagMethod =
   'tag.getInfo' |

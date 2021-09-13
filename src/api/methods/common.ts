@@ -43,6 +43,12 @@ export interface Artist {
   image?: Image[];
 }
 
+export interface Chart {
+  '#text': string;
+  from: string;
+  to: string;
+}
+
 export interface Image {
   size: 'small' | 'medium' | 'large' | 'extralarge' | 'mega' | '';
   '#text': string;

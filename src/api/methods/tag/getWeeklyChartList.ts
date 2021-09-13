@@ -1,14 +1,8 @@
 import { Params } from '../../proxy';
-import { MethodFunc } from '../common';
+import { Chart, MethodFunc } from '../common';
 
 export interface TagWeeklyChartListParams extends Params {
   tag: string;
-}
-
-export interface Chart {
-  '#text': string;
-  from: string;
-  to: string;
 }
 
 interface TagWeeklyChartListResponseBody {

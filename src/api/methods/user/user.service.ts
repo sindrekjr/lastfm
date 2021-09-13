@@ -1,6 +1,6 @@
 import { Tag } from '..';
 import { ApiProxy } from '../../proxy';
-import { Album, Artist, TagType, Track } from '../common';
+import { Album, Artist, Chart, TagType, Track } from '../common';
 import { BaseService } from '../service.base';
 
 import { getFriends, User, UserGetFriendsParams } from './getFriends';
@@ -12,10 +12,22 @@ import { getTopAlbums, TopAlbum, UserGetTopAlbumsParams } from './getTopAlbums';
 import { getTopArtists, TopArtist, UserGetTopArtistsParams } from './getTopArtists';
 import { getTopTags, UserGetTopTagsParams } from './getTopTags';
 import { getTopTracks, TopTrack, UserGetTopTracksParams } from './getTopTracks';
-import { getWeeklyAlbumChart, UserGetWeeklyAlbumChartParams } from './getWeeklyAlbumChart';
-import { getWeeklyArtistChart, UserGetWeeklyArtistChartParams } from './getWeeklyArtistChart';
+import {
+  UserChartAlbum,
+  getWeeklyAlbumChart,
+  UserGetWeeklyAlbumChartParams,
+} from './getWeeklyAlbumChart';
+import {
+  getWeeklyArtistChart,
+  UserChartArtist,
+  UserGetWeeklyArtistChartParams,
+} from './getWeeklyArtistChart';
 import { getWeeklyChartList, UserGetWeeklyChartListParams } from './getWeeklyChartList';
-import { getWeeklyTrackChart, UserGetWeeklyTrackChartParams } from './getWeeklyTrackChart';
+import {
+  getWeeklyTrackChart,
+  UserChartTrack,
+  UserGetWeeklyTrackChartParams,
+} from './getWeeklyTrackChart';
 
 export type UserMethod =
   'user.getFriends' |
@@ -89,19 +101,25 @@ export class UserService extends BaseService {
     getTopTracks(this.proxy, params)
   );
 
-  public getWeeklyAlbumChart = (params: UserGetWeeklyAlbumChartParams) => (
+  public getWeeklyAlbumChart = (
+    params: UserGetWeeklyAlbumChartParams,
+  ): Promise<UserChartAlbum[]> => (
     getWeeklyAlbumChart(this.proxy, params)
   );
 
-  public getWeeklyArtistChart = (params: UserGetWeeklyArtistChartParams) => (
+  public getWeeklyArtistChart = (
+    params: UserGetWeeklyArtistChartParams,
+  ): Promise<UserChartArtist[]> => (
     getWeeklyArtistChart(this.proxy, params)
   );
 
-  public getWeeklyChartList = (params: UserGetWeeklyChartListParams) => (
+  public getWeeklyChartList = (params: UserGetWeeklyChartListParams): Promise<Chart[]> => (
     getWeeklyChartList(this.proxy, params)
   );
 
-  public getWeeklyTrackChart = (params: UserGetWeeklyTrackChartParams) => (
+  public getWeeklyTrackChart = (
+    params: UserGetWeeklyTrackChartParams,
+  ): Promise<UserChartTrack[]> => (
     getWeeklyTrackChart(this.proxy, params)
   );
 }
