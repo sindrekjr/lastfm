@@ -58,7 +58,7 @@ describe('AlbumService', () => {
     });
 
     describe.each([
-      [{ album: 'The Bends', artist: 'Radioherad' }],
+      [{ album: 'The Bends', artist: 'Radiohead' }],
     ])('success', getTopTagsParams => {
       commonMethodSuccessTests(
         'album.getTopTags',

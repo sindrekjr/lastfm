@@ -8,31 +8,28 @@ export type Params = Record<string, ParamValue | ParamValue[]>;
 
 export interface ApiProxyOptions {
   apiKey: string;
-  format?: string;
-  sessionKey?: string;
   secret?: string;
+  sessionKey?: string;
   userAgent?: string;
 }
 
 export class ApiProxy {
   private baseUrl: string = 'https://ws.audioscrobbler.com/2.0/';
+  private format: string = 'json';
   private apiKey: string;
-  private format: string;
-  private userAgent: string;
   private secret?: string;
   private sessionKey?: string;
+  private userAgent: string;
 
   constructor({
     apiKey,
-    format = 'json',
     sessionKey,
     secret,
     userAgent = 'git@github.com:sindrekjr/lastfm',
   }: ApiProxyOptions) {
     this.apiKey = apiKey;
-    this.format = format;
-    this.sessionKey = sessionKey;
     this.secret = secret;
+    this.sessionKey = sessionKey;
     this.userAgent = userAgent;
   }
 
