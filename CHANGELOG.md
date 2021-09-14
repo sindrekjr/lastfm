@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.7.0](https://github.com/sindrekjr/lastfm/tree/v0.7.0)
+
+#### 2021-09-14
+- 🎉 Added `UserService` and completed all methods. All methods are now implemented.
+- 🎉 Proper README writeup, including guides to general usage and authentication.
+- 🎉 New common models `Chart` `TagType` `TimePeriod`.
+- 🔧 Refactored testing and done away with lots of redundant code.
+
 ## [v0.6.0](https://github.com/sindrekjr/lastfm/tree/v0.6.0)
 
 #### 2021-09-06
